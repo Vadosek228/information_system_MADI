@@ -82,12 +82,12 @@ public class ProfileFragment extends Fragment {
 //                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
 //                    Glide.with(ProfileFragment.this).load(user.getImageURL()).into(image_profile);
 
-                    //для обработки ошибки при загрузки изобржений
+//                    //для обработки ошибки при загрузки изобржений
 //                    RequestOptions ro = new RequestOptions();
 //                    ro.placeholder(R.drawable.ic_send);
 //                    ro.error(R.mipmap.ic_launcher);
 //
-                    //для загрузки изоображения
+//                    //для загрузки изоображения
 //                    Glide.with(ProfileFragment.this)
 //                            .applyDefaultRequestOptions(ro)
 //                            .load(user.getImageURL())
