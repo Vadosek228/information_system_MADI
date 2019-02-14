@@ -87,7 +87,7 @@ public class ProfileFragment extends Fragment {
 //                    ro.placeholder(R.drawable.ic_send);
 //                    ro.error(R.mipmap.ic_launcher);
 //
-//                    //для загрузки изоображения
+                    //для загрузки изоображения
 //                    Glide.with(ProfileFragment.this)
 //                            .applyDefaultRequestOptions(ro)
 //                            .load(user.getImageURL())
