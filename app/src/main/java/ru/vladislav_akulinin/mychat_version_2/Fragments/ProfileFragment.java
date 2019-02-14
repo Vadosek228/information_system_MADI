@@ -1,14 +1,11 @@
 package ru.vladislav_akulinin.mychat_version_2.Fragments;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -79,7 +77,21 @@ public class ProfileFragment extends Fragment {
                 if(user.getImageURL().equals("default")){
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 }else {
-//                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile); //нельзя загружать изобращение в еще не созданный фрагмент!!!! (ошибка)
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+                    //нельзя загружать изобращение в еще не созданный фрагмент!!!! (ошибка)
+//                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
+//                    Glide.with(ProfileFragment.this).load(user.getImageURL()).into(image_profile);
+
+//                    //для обработки ошибки при загрузки изобржений
+//                    RequestOptions ro = new RequestOptions();
+//                    ro.placeholder(R.drawable.ic_send);
+//                    ro.error(R.mipmap.ic_launcher);
+//
+//                    //для загрузки изоображения
+//                    Glide.with(ProfileFragment.this)
+//                            .applyDefaultRequestOptions(ro)
+//                            .load(user.getImageURL())
+//                            .into(image_profile);
                 }
             }
 
