@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "328767029483",
+    "firebase_url": "https://mychat-version-1.firebaseio.com",
+    "project_id": "mychat-version-1",
+    "storage_bucket": "mychat-version-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328767029483:android:dd8194e007223906",
+        "android_client_info": {
+          "package_name": "ru.vladislav_akulinin.mychat_version_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328767029483-6p0fv74onrap78jpt7gt1hh0fqqf5mc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.vladislav_akulinin.mychat_version_1",
+            "certificate_hash": "85d4c46832ceaa863a9bf677169bffef77b36409"
+          }
+        },
+        {
+          "client_id": "328767029483-jetem1ubhi1mkkjqr9tneundboicml33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_oau6ATq3VrDK_VgHGwh-iiYPBypWoSc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328767029483-jetem1ubhi1mkkjqr9tneundboicml33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328767029483:android:b0b483b4a079bf64",
+        "android_client_info": {
+          "package_name": "ru.vladislav_akulinin.mychat_version_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "328767029483-mlf26933f0hap4aibjf5et7vukun9ubi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.vladislav_akulinin.mychat_version_2",
+            "certificate_hash": "85d4c46832ceaa863a9bf677169bffef77b36409"
+          }
+        },
+        {
+          "client_id": "328767029483-jetem1ubhi1mkkjqr9tneundboicml33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_oau6ATq3VrDK_VgHGwh-iiYPBypWoSc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "328767029483-jetem1ubhi1mkkjqr9tneundboicml33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
