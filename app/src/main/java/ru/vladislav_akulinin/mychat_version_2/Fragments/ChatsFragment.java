@@ -24,6 +24,7 @@ import java.util.List;
 
 import ru.vladislav_akulinin.mychat_version_2.Adapter.UserAdapter;
 import ru.vladislav_akulinin.mychat_version_2.Model.Chat;
+import ru.vladislav_akulinin.mychat_version_2.Model.Chatlist;
 import ru.vladislav_akulinin.mychat_version_2.Model.User;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
@@ -37,7 +38,8 @@ public class ChatsFragment extends Fragment {
     FirebaseUser fuser;
     DatabaseReference reference;
 
-    private List<String> usersList;
+    private List<String> usersList; //оптимизируем код
+//    private List<Chatlist> usersList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,6 +54,7 @@ public class ChatsFragment extends Fragment {
 
         usersList = new ArrayList<>();
 
+        //заменяем данный код (для оптимизации)
         reference = FirebaseDatabase.getInstance().getReference("Chats");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,10 +81,58 @@ public class ChatsFragment extends Fragment {
             }
         });
 
+//        reference = FirebaseDatabase.getInstance().getReference("Chatlist").child(fuser.getUid());
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                usersList.clear();
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    Chatlist chatlist = snapshot.getValue(Chatlist.class);
+//                    usersList.add(chatlist);
+//                }
+//
+//                chatList();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
         return view;
     }
 
-    private void readChats(){
+//    private void chatList() {
+//
+//        mUsers = new ArrayList<>();
+//        reference = FirebaseDatabase.getInstance().getReference("User");
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                mUsers.clear();
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    User user = snapshot.getValue(User.class);
+//                    for(Chatlist chatlist : usersList){
+//                        if(user.getId().equals(chatlist.getId())){
+//                            mUsers.add(user);
+//                        }
+//                    }
+//                }
+//                userAdapter = new UserAdapter(getContext(), mUsers,true);
+//                recyclerView.setAdapter(userAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//    }
+
+//    заменяем данный код (для оптимизации)
+    private void readChats(){ //читать сообщения
         mUsers = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("User");

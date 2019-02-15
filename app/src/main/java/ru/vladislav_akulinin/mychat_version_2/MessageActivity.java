@@ -157,7 +157,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     //функция для отправки сообщений
-    private void sendMessage(String sender, String receiver, String message){
+    private void sendMessage(String sender, final String receiver, String message){
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -168,6 +168,29 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("isseen", false); //для показа (прочитано или нет)
 
         reference.child("Chats").push().setValue(hashMap);
+
+        //меняем код для лучшей производительности
+        //добавляем пользователя в фрагмент чата
+        intent = getIntent();
+        final String userid = intent.getStringExtra("userid");
+
+        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(fuser.getUid())
+                .child(userid);
+
+        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
+                    chatRef.child("id").setValue(userid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void readMessage(final String myid, final String userid, final String imageurl){
