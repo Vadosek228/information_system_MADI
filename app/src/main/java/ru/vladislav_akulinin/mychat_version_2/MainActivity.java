@@ -58,38 +58,39 @@ public class MainActivity extends AppCompatActivity {
                 .getReference("User") //где хранятся
                 .child(firebaseUser.getUid());
 
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                User user = dataSnapshot.getValue(User.class);
-//                try { //обработка исключений, если не найденны данные на сервере
-//                    username.setText(user.getUsername());
-//                    if(user.getImageURL().equals("default")){
-//                        profile_image.setImageResource(R.mipmap.ic_launcher); //картинка по умолчанию
-//                    }
-//                    else{
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                try { //обработка исключений, если не найденны данные на сервере
+                    username.setText(user.getUsername());
+                    if(user.getImageURL().equals("default")){
+                        profile_image.setImageResource(R.mipmap.ic_launcher); //картинка по умолчанию
+                    }
+                    else{
 //                        Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_image);
-//                    }
-//                }
-//                catch (NullPointerException exc){
-//                    Toast.makeText(MainActivity.this, "Для данного пользователя не нашлось данных", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+                    }
+                }
+                catch (NullPointerException exc){
+                    Toast.makeText(MainActivity.this, "Для данного пользователя не нашлось данных", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         ViewPager viewPager = findViewById(R.id.view_pager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragments(new ChatsFragment(), "Chats");
-        viewPagerAdapter.addFragments(new UsersFragment(), "Users");
-        viewPagerAdapter.addFragments(new ProfileFragment(), "Profile");
+        viewPagerAdapter.addFragments(new ChatsFragment(), "Чаты");
+        viewPagerAdapter.addFragments(new UsersFragment(), "Пользователи");
+        viewPagerAdapter.addFragments(new ProfileFragment(), "Профиль");
 
         viewPager.setAdapter(viewPagerAdapter);
 
@@ -142,30 +143,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                try { //обработка исключений, если не найденны данные на сервере
-                    username.setText(user.getUsername());
-                    if(user.getImageURL().equals("default")){
-                        profile_image.setImageResource(R.mipmap.ic_launcher); //картинка по умолчанию
-                    }
-                    else{
-//                        Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_image);
-                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
-                    }
-                }
-                catch (NullPointerException exc){
-                    Toast.makeText(MainActivity.this, "Для данного пользователя не нашлось данных", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 }
