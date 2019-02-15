@@ -87,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("username", username);
                             hashMap.put("imageURL", "default");
                             hashMap.put("status", "offline");
+                            hashMap.put("search", username.toLowerCase()); //перевод имени в имя с маленькой букой
 
                             //получаем дополнительную информацию для установки значения зависимого атрибута
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
