@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,8 @@ public class MessageActivity extends AppCompatActivity {
     DatabaseReference reference;
 
     Intent intent;
+
+    ValueEventListener seenListener; //оказать статус сообщения (прочитано или нет)
 
     @SuppressLint("CutPasteId")
     @Override
@@ -124,6 +127,33 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+
+        //вешаем звонок на сообщение
+        seenMessage(userid);
+
+    }
+
+    //функция для отобращения статуса сообщения (прочитано/непрачитано)
+    private void seenMessage(final String userid){
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        seenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if(chat.getReceiver().equals(fuser.getUid()) && chat.getSender().equals(userid)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isseen", true);
+                        snapshot.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     //функция для отправки сообщений
@@ -135,6 +165,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender", sender); //отправитель
         hashMap.put("receiver", receiver); //получатель
         hashMap.put("message", message);
+        hashMap.put("isseen", false); //для показа (прочитано или нет)
 
         reference.child("Chats").push().setValue(hashMap);
     }
@@ -185,6 +216,14 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
+        //данное дейстиве альтернатива, но все ломается
+//        try {
+            reference.removeEventListener(seenListener); //для показа прочитано или нет
+//        }catch (NullPointerException exc){
+////            Toast.makeText(MessageActivity.this, "Загрузка данных", Toast.LENGTH_SHORT).show();
+//        }
+
         status("offline");
     }
 }
