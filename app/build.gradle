@@ -38,6 +38,12 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     //для загрузки изображения(мультимедия) с использованием кеша
     implementation 'com.github.bumptech.glide:glide:4.8.0'
+    //для отправки уведомления пользователю
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    implementation 'com.google.firebase:firebase-messaging:17.3.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

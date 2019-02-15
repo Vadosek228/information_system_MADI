@@ -23,17 +23,28 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Queue;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import ru.vladislav_akulinin.mychat_version_2.Adapter.MessageAdapter;
+import ru.vladislav_akulinin.mychat_version_2.Fragments.APIService;
 import ru.vladislav_akulinin.mychat_version_2.Model.Chat;
 import ru.vladislav_akulinin.mychat_version_2.Model.User;
+import ru.vladislav_akulinin.mychat_version_2.Notifications.Client;
+import ru.vladislav_akulinin.mychat_version_2.Notifications.Data;
+import ru.vladislav_akulinin.mychat_version_2.Notifications.MyResponse;
+import ru.vladislav_akulinin.mychat_version_2.Notifications.Sender;
+import ru.vladislav_akulinin.mychat_version_2.Notifications.Token;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -52,6 +63,12 @@ public class MessageActivity extends AppCompatActivity {
     DatabaseReference reference;
 
     Intent intent;
+
+    String userid; //для оптимизации кода
+
+    //для отправки уведомлений
+    APIService apiService;
+    boolean notify = false;
 
     ValueEventListener seenListener; //оказать статус сообщения (прочитано или нет)
 
@@ -76,6 +93,8 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+
         //для вывода сообщений
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -95,6 +114,9 @@ public class MessageActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //для отправки уведомления
+                notify = true;
+
                 String msg = text_send.getText().toString();
                 if(!msg.equals("")){
                     sendMessage(fuser.getUid(), userid, msg);
@@ -191,6 +213,67 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+
+        //для уведомлений о сообщениях
+        final String msg = message;
+
+        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if(notify){
+                    sendNotification(receiver, user.getUsername(), msg);
+                }
+                notify = false;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    //для отправки уведомлений
+    private void sendNotification(String receiver, final String username, final String message){
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(receiver);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Token token = snapshot.getValue(Token.class);
+                    Data data = new Data(fuser.getUid(), R.mipmap.ic_launcher, username+": "+message, "Новое сообщение",
+                            userid);
+
+                    Sender sender = new Sender(data, token.getToken());
+
+                    apiService.sendNotification(sender)
+                            .enqueue(new Callback<MyResponse>() {
+                                @Override
+                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    if(response.code() == 200){
+                                        if(response.body().success != 1){
+                                            Toast.makeText(MessageActivity.this, "Ошибка!" , Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void readMessage(final String myid, final String userid, final String imageurl){

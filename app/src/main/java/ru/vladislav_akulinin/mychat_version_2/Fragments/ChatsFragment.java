@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ import ru.vladislav_akulinin.mychat_version_2.Adapter.UserAdapter;
 import ru.vladislav_akulinin.mychat_version_2.Model.Chat;
 import ru.vladislav_akulinin.mychat_version_2.Model.Chatlist;
 import ru.vladislav_akulinin.mychat_version_2.Model.User;
+import ru.vladislav_akulinin.mychat_version_2.Notifications.Token;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
 public class ChatsFragment extends Fragment {
@@ -100,7 +102,17 @@ public class ChatsFragment extends Fragment {
 //            }
 //        });
 
+        //для отправки уведомлений
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+
         return view;
+    }
+
+    //для отправки уведомлений
+    private void updateToken(String token){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1 = new Token(token);
+        reference.child(fuser.getUid()).setValue(token1);
     }
 
 //    private void chatList() {
