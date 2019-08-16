@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ru.vladislav_akulinin.mychat_version_2">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,8 +13,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.activity.LoginActivity"></activity>
+        <activity android:name=".ui.activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,33 +24,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".StartActivity" />
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".activity.RegisterActivity"
+            android:parentActivityName=".ui.activity.StartActivity" />
         <activity
-            android:name=".LoginActivity"
-            android:parentActivityName=".StartActivity" />
-        <activity android:name=".MessageActivity" />
-        <activity android:name=".ResetPasswordActivity"
-            android:parentActivityName=".LoginActivity"/>
+            android:name=".activity.MainActivityJava"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LoginActivityJava"
+            android:parentActivityName=".ui.activity.StartActivity" />
+        <activity android:name=".activity.MessageActivity" />
+        <activity
+            android:name=".activity.ResetPasswordActivity"
+            android:parentActivityName=".activity.LoginActivityJava" />
 
-        <service android:name=".Notifications.MyFirebaseIdService"
+        <service
+            android:name=".notifications.MyFirebaseIdService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name=".Notifications.MyFirebaseMessaging"
+        <service
+            android:name=".notifications.MyFirebaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

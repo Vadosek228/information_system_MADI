@@ -1,7 +1,22 @@
 <resources>
-    <string name="app_name">MyChat_version_2</string>
+    <string name="app_name">UNIComm MADI</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="stringResetTXT">Нажмите \'\' сбросить\'\', чтобы сбросить пароль для данной учетной записи</string>
+    <string name="menu_contacts">Контакты</string>
+    <string name="menu_chats">Чаты</string>
+    <string name="menu_load">Нагрузка</string>
+    <string name="menu_library">Библиотека</string>
+    <string name="menu_profile">Профиль</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_exit">Выход</string>
+
+    <string name="et_in_text">Введите текст</string>
+    <string name="profile_label_rating">Рейтинг</string>
+    <string name="profile_label_respect">Уважение</string>
+    <string name="profile_hint_repository">Репозиторий</string>
+    <string name="profile_hint_about">О себе</string>
+    <string name="profile_hint_last_name">Фамилия</string>
+    <string name="profile_hint_first_name">Имя</string>
 </resources>
