@@ -33,7 +33,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import ru.vladislav_akulinin.mychat_version_2.model.User;
+import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
 import static android.app.Activity.RESULT_OK;
@@ -70,15 +70,15 @@ public class ProfileFragmentJava extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
-                if(user.getImageURL().equals("default")){
+                UserJava userJava = dataSnapshot.getValue(UserJava.class);
+                username.setText(userJava.getUsername());
+                if(userJava.getImageURL().equals("default")){
                     image_profile.setImageResource(R.mipmap.ic_launcher);
                 }else {
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
                     //нельзя загружать изобращение в еще не созданный фрагмент!!!! (ошибка)
-//                    Glide.with(getContext()).load(user.getImageURL()).into(image_profile);
-//                    Glide.with(ProfileFragmentJava.this).load(user.getImageURL()).into(image_profile);
+//                    Glide.with(getContext()).load(userJava.getImageURL()).into(image_profile);
+//                    Glide.with(ProfileFragmentJava.this).load(userJava.getImageURL()).into(image_profile);
 
 //                    //для обработки ошибки при загрузки изобржений
 //                    RequestOptions ro = new RequestOptions();
@@ -88,7 +88,7 @@ public class ProfileFragmentJava extends Fragment {
 //                    //для загрузки изоображения
 //                    Glide.with(ProfileFragmentJava.this)
 //                            .applyDefaultRequestOptions(ro)
-//                            .load(user.getImageURL())
+//                            .load(userJava.getImageURL())
 //                            .into(image_profile);
                 }
             }

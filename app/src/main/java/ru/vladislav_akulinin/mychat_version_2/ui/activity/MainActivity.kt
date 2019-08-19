@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference
 import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragment
-import ru.vladislav_akulinin.mychat_version_2.fragments.ProfileFragment
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ProfileFragment
 import ru.vladislav_akulinin.mychat_version_2.fragments.UsersFragment
 
 

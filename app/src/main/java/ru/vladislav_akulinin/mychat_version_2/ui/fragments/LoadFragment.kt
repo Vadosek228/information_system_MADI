@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.fragments
+package ru.vladislav_akulinin.mychat_version_2.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 import ru.vladislav_akulinin.mychat_version_2.R
 
-class LibraryFragment : Fragment() {
+class LoadFragment : Fragment() {
 
     companion object {
         fun newInstance(): LoadFragment = LoadFragment()
@@ -17,6 +17,8 @@ class LibraryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_library, container, false)
+        return inflater.inflate(R.layout.fragment_load, container, false)
     }
+
+
 }

@@ -35,7 +35,7 @@ import retrofit2.Response;
 import ru.vladislav_akulinin.mychat_version_2.notifications.interface_notification.APIService;
 import ru.vladislav_akulinin.mychat_version_2.adapter.MessageAdapter;
 import ru.vladislav_akulinin.mychat_version_2.model.Chat;
-import ru.vladislav_akulinin.mychat_version_2.model.User;
+import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Client;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Data;
 import ru.vladislav_akulinin.mychat_version_2.notifications.MyResponse;
@@ -125,21 +125,21 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        reference = FirebaseDatabase.getInstance().getReference("User").child(userid);
+        reference = FirebaseDatabase.getInstance().getReference("UserJava").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
-                if(user.getImageURL().equals("default")){
+                UserJava userJava = dataSnapshot.getValue(UserJava.class);
+                username.setText(userJava.getUsername());
+                if(userJava.getImageURL().equals("default")){
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 } else {
-//                    Glide.with(MessageActivity.this).load(user.getImageURL()).into(profile_image); //нужно поместить фотографию в базуданных, которая будет по умолчанию
-                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+//                    Glide.with(MessageActivity.this).load(userJava.getImageURL()).into(profile_image); //нужно поместить фотографию в базуданных, которая будет по умолчанию
+                    Glide.with(getApplicationContext()).load(userJava.getImageURL()).into(profile_image);
                 }
 
-                readMessage(fuser.getUid(), userid, user.getImageURL());
+                readMessage(fuser.getUid(), userid, userJava.getImageURL());
             }
 
             @Override
@@ -215,13 +215,13 @@ public class MessageActivity extends AppCompatActivity {
         //для уведомлений о сообщениях
         final String msg = message;
 
-        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("UserJava").child(fuser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
+                UserJava userJava = dataSnapshot.getValue(UserJava.class);
                 if(notify){
-                    sendNotification(receiver, user.getUsername(), msg);
+                    sendNotification(receiver, userJava.getUsername(), msg);
                 }
                 notify = false;
             }
@@ -303,7 +303,7 @@ public class MessageActivity extends AppCompatActivity {
 
     //для пользовательского статуса
     private void status(String status){
-        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("UserJava").child(fuser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", status);

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package ru.vladislav_akulinin.mychat_version_2.repositories
 
 import android.app.WallpaperInfo

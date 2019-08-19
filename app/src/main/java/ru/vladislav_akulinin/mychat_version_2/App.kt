@@ -1,11 +1,13 @@
 package ru.vladislav_akulinin.mychat_version_2
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 
 //единная точка входа. Класс, который вызывается при старте приложения
 //в нем создаем объект контекста, при старте приложения
+@SuppressLint("Registered")
 class App : Application(){
     companion object{
         private var instance:App? = null

@@ -1,6 +1,5 @@
 package ru.vladislav_akulinin.mychat_version_2.activity;
 
-import android.content.Intent;
 import androidx.annotation.NonNull;
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
@@ -28,7 +27,7 @@ import ru.vladislav_akulinin.mychat_version_2.adapter.ViewPagerAdapter;
 import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragment;
 import ru.vladislav_akulinin.mychat_version_2.fragments.ProfileFragmentJava;
 import ru.vladislav_akulinin.mychat_version_2.fragments.UsersFragment;
-import ru.vladislav_akulinin.mychat_version_2.model.User;
+import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
 public class MainActivityJava extends AppCompatActivity {
@@ -61,15 +60,15 @@ public class MainActivityJava extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
+                UserJava userJava = dataSnapshot.getValue(UserJava.class);
                 try { //обработка исключений, если не найденны данные на сервере
-                    username.setText(user.getUsername());
-                    if(user.getImageURL().equals("default")){
+                    username.setText(userJava.getUsername());
+                    if(userJava.getImageURL().equals("default")){
                         profile_image.setImageResource(R.mipmap.ic_launcher); //картинка по умолчанию
                     }
                     else{
-//                        Glide.with(MainActivityJava.this).load(user.getImageURL()).into(profile_image);
-                        Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+//                        Glide.with(MainActivityJava.this).load(userJava.getImageURL()).into(profile_image);
+                        Glide.with(getApplicationContext()).load(userJava.getImageURL()).into(profile_image);
                     }
                 }
                 catch (NullPointerException exc){
@@ -120,7 +119,7 @@ public class MainActivityJava extends AppCompatActivity {
 
     //для пользовательского статуса
     private void status(String status){
-        reference = FirebaseDatabase.getInstance().getReference("User").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("UserJava").child(firebaseUser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", status);

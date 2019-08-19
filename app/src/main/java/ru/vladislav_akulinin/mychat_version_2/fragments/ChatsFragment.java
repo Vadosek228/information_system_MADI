@@ -23,7 +23,7 @@ import java.util.List;
 
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter;
 import ru.vladislav_akulinin.mychat_version_2.model.Chat;
-import ru.vladislav_akulinin.mychat_version_2.model.User;
+import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Token;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
@@ -32,7 +32,7 @@ public class ChatsFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private UserAdapter userAdapter;
-    private List<User> mUsers;
+    private List<UserJava> mUserJavas;
 
     FirebaseUser fuser;
     DatabaseReference reference;
@@ -114,21 +114,21 @@ public class ChatsFragment extends Fragment {
 
 //    private void chatList() {
 //
-//        mUsers = new ArrayList<>();
-//        reference = FirebaseDatabase.getInstance().getReference("User");
+//        mUserJavas = new ArrayList<>();
+//        reference = FirebaseDatabase.getInstance().getReference("UserJava");
 //        reference.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                mUsers.clear();
+//                mUserJavas.clear();
 //                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    User user = snapshot.getValue(User.class);
+//                    UserJava user = snapshot.getValue(UserJava.class);
 //                    for(Chatlist chatlist : usersList){
 //                        if(user.getId().equals(chatlist.getId())){
-//                            mUsers.add(user);
+//                            mUserJavas.add(user);
 //                        }
 //                    }
 //                }
-//                userAdapter = new UserAdapter(getContext(), mUsers,true);
+//                userAdapter = new UserAdapter(getContext(), mUserJavas,true);
 //                recyclerView.setAdapter(userAdapter);
 //            }
 //
@@ -142,35 +142,35 @@ public class ChatsFragment extends Fragment {
 
 //    заменяем данный код (для оптимизации)
     private void readChats(){ //читать сообщения
-        mUsers = new ArrayList<>();
+        mUserJavas = new ArrayList<>();
 
-        reference = FirebaseDatabase.getInstance().getReference("User");
+        reference = FirebaseDatabase.getInstance().getReference("UserJava");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUsers.clear();
+                mUserJavas.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    User user = snapshot.getValue(User.class);
+                    UserJava userJava = snapshot.getValue(UserJava.class);
 
                     //показывать 1 пользователя из чатов
                     for(String id : usersList){
-                        if (user.getId().equals(id)){
-                            if(mUsers.isEmpty()){
-                                for(User user1 : mUsers){
-                                    if(!user.getId().equals(user1.getId())){
-                                        mUsers.add(user);
+                        if (userJava.getId().equals(id)){
+                            if(mUserJavas.isEmpty()){
+                                for(UserJava userJava1 : mUserJavas){
+                                    if(!userJava.getId().equals(userJava1.getId())){
+                                        mUserJavas.add(userJava);
                                     }
                                 }
                             } else {
-                                mUsers.add(user);
+                                mUserJavas.add(userJava);
                             }
                         }
                     }
                 }
                                                                         //try - для статуса
-                userAdapter = new UserAdapter(getContext(), mUsers, true);
+                userAdapter = new UserAdapter(getContext(), mUserJavas, true);
                 recyclerView.setAdapter(userAdapter);
             }
 

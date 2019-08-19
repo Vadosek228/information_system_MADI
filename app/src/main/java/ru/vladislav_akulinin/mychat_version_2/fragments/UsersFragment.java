@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter;
-import ru.vladislav_akulinin.mychat_version_2.model.User;
+import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
 public class UsersFragment extends Fragment {
@@ -33,7 +33,7 @@ public class UsersFragment extends Fragment {
     private RecyclerView recyclerView;
 
     private UserAdapter userAdapter;
-    private List<User> mUsers;
+    private List<UserJava> mUserJavas;
 
     EditText search_user;
 
@@ -47,7 +47,7 @@ public class UsersFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mUsers = new ArrayList<>();
+        mUserJavas = new ArrayList<>();
 
         readUsers();
 
@@ -84,18 +84,18 @@ public class UsersFragment extends Fragment {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUsers.clear();
+                mUserJavas.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    User user = snapshot.getValue(User.class);
+                    UserJava userJava = snapshot.getValue(UserJava.class);
 
-                    assert user != null;
+                    assert userJava != null;
                     assert fuser != null;
-                    if(!user.getId().equals(fuser.getUid())){
-                        mUsers.add(user);
+                    if(!userJava.getId().equals(fuser.getUid())){
+                        mUserJavas.add(userJava);
                     }
                 }
 
-                userAdapter = new UserAdapter(getContext(), mUsers, false);
+                userAdapter = new UserAdapter(getContext(), mUserJavas, false);
                 recyclerView.setAdapter(userAdapter); //установить новое значение в ресайкл из поиска
             }
 
@@ -117,18 +117,18 @@ public class UsersFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (search_user.getText().toString().equals("")) { //если значение поисковой строки равно нулю
-                    mUsers.clear();
+                    mUserJavas.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        User user = snapshot.getValue(User.class);
+                        UserJava userJava = snapshot.getValue(UserJava.class);
 
-                        assert user != null;
+                        assert userJava != null;
                         assert firebaseUser != null;
-                        if (!user.getId().equals(firebaseUser.getUid())) {
-                            mUsers.add(user);
+                        if (!userJava.getId().equals(firebaseUser.getUid())) {
+                            mUserJavas.add(userJava);
                         }
                     }
 
-                    userAdapter = new UserAdapter(getContext(), mUsers, false);
+                    userAdapter = new UserAdapter(getContext(), mUserJavas, false);
                     recyclerView.setAdapter(userAdapter);
                 }
             }

@@ -1,6 +1,6 @@
 package ru.vladislav_akulinin.mychat_version_2.model;
 
-public class User {
+public class UserJava {
 
     private String id;
     private String username;
@@ -8,7 +8,7 @@ public class User {
     private String status;
     private String search;
 
-    public User(String id, String username, String imageURL, String status, String search)  {
+    public UserJava(String id, String username, String imageURL, String status, String search)  {
         this.id = id;
         this.username = username;
         this.imageURL = imageURL;
@@ -16,7 +16,7 @@ public class User {
         this.search = search;
     }
 
-    public User(){
+    public UserJava(){
 
     }
 

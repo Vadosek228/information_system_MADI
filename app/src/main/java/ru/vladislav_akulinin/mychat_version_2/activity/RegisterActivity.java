@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                             String userid = firebaseUser.getUid();//получаем идентификатор текущего пользователя
 
 
-                            reference = FirebaseDatabase.getInstance().getReference("User") //получение корневой ссылки, где будут храниться
+                            reference = FirebaseDatabase.getInstance().getReference("UserJava") //получение корневой ссылки, где будут храниться
                                     .child(userid); //является дочерним узлом
 
                             HashMap<String, String> hashMap = new HashMap<>(); //хэш-таблица для хранения, обеспечивает быстрое выполнение запросов

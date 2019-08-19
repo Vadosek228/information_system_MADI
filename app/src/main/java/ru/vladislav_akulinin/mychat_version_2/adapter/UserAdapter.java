@@ -23,14 +23,14 @@ import java.util.List;
 
 import ru.vladislav_akulinin.mychat_version_2.activity.MessageActivity;
 import ru.vladislav_akulinin.mychat_version_2.model.Chat;
-import ru.vladislav_akulinin.mychat_version_2.model.User;
+import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
 //адаптер для вывода всех пользователей
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<User> mUsers;
+    private List<UserJava> mUserJavas;
 
     //для выбора статуса
     private boolean ischat;
@@ -38,9 +38,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     //для вывода начала сообщения в выборах чата
     String theLastMessage;
 
-    public UserAdapter (Context mContext, List<User> mUsers, boolean ischat){
+    public UserAdapter (Context mContext, List<UserJava> mUserJavas, boolean ischat){
         this.mContext = mContext;
-        this.mUsers = mUsers;
+        this.mUserJavas = mUserJavas;
         this.ischat = ischat;
     }
 
@@ -54,24 +54,24 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final User user = mUsers.get(position);
-        holder.username.setText(user.getUsername());
-        if(user.getImageURL().equals("default")){
+        final UserJava userJava = mUserJavas.get(position);
+        holder.username.setText(userJava.getUsername());
+        if(userJava.getImageURL().equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else {
-            Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
+            Glide.with(mContext).load(userJava.getImageURL()).into(holder.profile_image);
         }
 
         //проверка для добавления начало сообщения в списке выбора диалогов
         if(ischat){
-            lastMessage(user.getId(), holder.last_msg);
+            lastMessage(userJava.getId(), holder.last_msg);
         }else {
             holder.last_msg.setVisibility(View.GONE);
         }
 
 //        для статуса пользователя
         if(ischat){
-            if(user.getStatus().equals("online")){
+            if(userJava.getStatus().equals("online")){
                 holder.img_on.setVisibility(View.VISIBLE);
                 holder.img_off.setVisibility(View.GONE);
             } else {
@@ -88,7 +88,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", user.getId());
+                intent.putExtra("userid", userJava.getId());
                 mContext.startActivity(intent);
             }
         });
@@ -97,7 +97,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mUsers.size();
+        return mUserJavas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
