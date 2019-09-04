@@ -26,4 +26,8 @@
     <color name="color_view_background">#B6B6B8</color>
     <color name="color_background_circleImageView">#878787</color>
 
+
+    //background EditText
+    <color name="color_background_edit_text">#BEC8AEDA</color>
+
 </resources>

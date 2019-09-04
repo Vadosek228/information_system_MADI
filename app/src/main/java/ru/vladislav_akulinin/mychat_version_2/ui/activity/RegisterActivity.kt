@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_register_new.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import java.util.HashMap
 
+
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
@@ -44,6 +45,7 @@ class RegisterActivity : AppCompatActivity() {
         val lastName = tv_last_name?.text?.toString()
         val fatherName = tv_father_name.text.toString()
         val phone = tv_phone.text.toString()
+        val userStatus = spinner_status.selectedItem.toString()
         val email = tv_email?.text?.toString()
         val password = et_password?.text?.toString()
         val passwordCheck = et_password_check?.text?.toString()
@@ -56,11 +58,11 @@ class RegisterActivity : AppCompatActivity() {
         } else if (password != passwordCheck){
             Toast.makeText(this@RegisterActivity, "Пароль не совпадает", Toast.LENGTH_SHORT).show()
         } else {
-            register(firstName, lastName, fatherName, phone, email, password)
+            register(firstName, lastName, fatherName, phone, email, userStatus, password)
         }
     }
 
-    private fun register(first_name: String, last_name: String, father_name: String, phone: String, email: String, password: String)
+    private fun register(first_name: String, last_name: String, father_name: String, phone: String, email: String, userStatus: String, password: String)
     {
         auth?.createUserWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener { task ->
@@ -78,7 +80,7 @@ class RegisterActivity : AppCompatActivity() {
                         hashMap["fatherName"] = father_name
                         hashMap["phoneNumber"] = phone
                         hashMap["email"] = email
-//                        hashMap["statusUser"] = status //TODO create status student else teacher
+                        hashMap["statusUser"] = userStatus
                         hashMap["imageURL"] = "default"
                         hashMap["status"] = "offline"
                         hashMap["search"] = first_name.toLowerCase() //перевод имени в имя с маленькой букой

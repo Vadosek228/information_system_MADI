@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-import ru.vladislav_akulinin.mychat_version_2.model.Chat;
+import ru.vladislav_akulinin.mychat_version_2.model.ChatJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
@@ -25,14 +25,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public static final int MSG_TYPE_RIGHT = 1;
 
     private Context mContext;
-    private List<Chat> mChat;
+    private List<ChatJava> mChatJava;
     private String imageurl;
 
     FirebaseUser fuser;
 
-    public MessageAdapter (Context mContext, List<Chat> mChat, String imageurl){
+    public MessageAdapter (Context mContext, List<ChatJava> mChatJava, String imageurl){
         this.mContext = mContext;
-        this.mChat = mChat;
+        this.mChatJava = mChatJava;
         this.imageurl = imageurl;
     }
 
@@ -51,9 +51,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
 
-        Chat chat = mChat.get(position);
+        ChatJava chatJava = mChatJava.get(position);
 
-        holder.show_message.setText(chat.getMessage());
+        holder.show_message.setText(chatJava.getMessage());
 
         if(imageurl.equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
@@ -62,8 +62,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
 
         //для отображения статуса сообщения (прочитано или нет)
-        if(position == mChat.size()-1){
-            if(chat.isIsseen()){
+        if(position == mChatJava.size()-1){
+            if(chatJava.isIsseen()){
                 holder.txt_seen.setText("Прочитано");
             }else {
                 holder.txt_seen.setText("Не прочитано");
@@ -76,7 +76,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return mChat.size();
+        return mChatJava.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -98,7 +98,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public int getItemViewType(int position) {
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         //устанавливаем кто отправил сообщение
-        if(mChat.get(position).getSender().equals(fuser.getUid())){
+        if(mChatJava.get(position).getSender().equals(fuser.getUid())){
             return MSG_TYPE_RIGHT;
         }else {
             return MSG_TYPE_LEFT;

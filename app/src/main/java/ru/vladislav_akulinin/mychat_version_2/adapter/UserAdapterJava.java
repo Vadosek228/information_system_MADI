@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 import ru.vladislav_akulinin.mychat_version_2.activity.MessageActivity;
-import ru.vladislav_akulinin.mychat_version_2.model.Chat;
+import ru.vladislav_akulinin.mychat_version_2.model.ChatJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
@@ -133,10 +133,10 @@ public class UserAdapterJava extends RecyclerView.Adapter<UserAdapterJava.ViewHo
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Chat chat = snapshot.getValue(Chat.class);
-                    if(chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid) ||
-                            chat.getReceiver().equals(userid) && chat.getSender().equals(firebaseUser.getUid())){
-                        theLastMessage = chat.getMessage();
+                    ChatJava chatJava = snapshot.getValue(ChatJava.class);
+                    if(chatJava.getReceiver().equals(firebaseUser.getUid()) && chatJava.getSender().equals(userid) ||
+                            chatJava.getReceiver().equals(userid) && chatJava.getSender().equals(firebaseUser.getUid())){
+                        theLastMessage = chatJava.getMessage();
                     }
                 }
 

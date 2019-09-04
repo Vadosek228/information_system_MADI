@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapterJava;
-import ru.vladislav_akulinin.mychat_version_2.model.Chat;
+import ru.vladislav_akulinin.mychat_version_2.model.ChatJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Token;
 import ru.vladislav_akulinin.mychat_version_2.R;
@@ -61,13 +61,13 @@ public class ChatsFragment extends Fragment {
                 usersList.clear();
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Chat chat = snapshot.getValue(Chat.class);
+                    ChatJava chatJava = snapshot.getValue(ChatJava.class);
 
-                    if(chat.getSender().equals(fuser.getUid())){
-                        usersList.add(chat.getReceiver());
+                    if(chatJava.getSender().equals(fuser.getUid())){
+                        usersList.add(chatJava.getReceiver());
                     }
-                    if(chat.getReceiver().equals(fuser.getUid())){
-                        usersList.add(chat.getSender());
+                    if(chatJava.getReceiver().equals(fuser.getUid())){
+                        usersList.add(chatJava.getSender());
                     }
                 }
 

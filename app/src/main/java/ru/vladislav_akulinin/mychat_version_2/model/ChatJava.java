@@ -1,20 +1,20 @@
 package ru.vladislav_akulinin.mychat_version_2.model;
 
-public class Chat {
+public class ChatJava {
 
     private String sender; // отправитель
     private String receiver; //получатель
     private String message;
     private boolean isseen;
 
-    public Chat(String sender, String receiver, String message, boolean isseen){
+    public ChatJava(String sender, String receiver, String message, boolean isseen){
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
         this.isseen = isseen;
     }
 
-    public Chat(){
+    public ChatJava(){
 
     }
 

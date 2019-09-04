@@ -34,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.vladislav_akulinin.mychat_version_2.notifications.interface_notification.APIService;
 import ru.vladislav_akulinin.mychat_version_2.adapter.MessageAdapter;
-import ru.vladislav_akulinin.mychat_version_2.model.Chat;
+import ru.vladislav_akulinin.mychat_version_2.model.ChatJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Client;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Data;
@@ -53,7 +53,7 @@ public class MessageActivity extends AppCompatActivity {
     EditText text_send;
 
     MessageAdapter messageAdapter;
-    List<Chat> mChat;
+    List<ChatJava> mChatJava;
 
     RecyclerView recyclerView;
 
@@ -160,8 +160,8 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Chat chat = snapshot.getValue(Chat.class);
-                    if(chat.getReceiver().equals(fuser.getUid()) && chat.getSender().equals(userid)){
+                    ChatJava chatJava = snapshot.getValue(ChatJava.class);
+                    if(chatJava.getReceiver().equals(fuser.getUid()) && chatJava.getSender().equals(userid)){
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("isseen", true);
                         snapshot.getRef().updateChildren(hashMap);
@@ -275,21 +275,21 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void readMessage(final String myid, final String userid, final String imageurl){
-        mChat = new ArrayList<>();
+        mChatJava = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("Chats");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mChat.clear();
+                mChatJava.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Chat chat = snapshot.getValue(Chat.class);
-                    if(chat.getReceiver().equals(myid) && chat.getSender().equals(userid) ||
-                            chat.getReceiver().equals(userid) && chat.getSender().equals(myid)){
-                        mChat.add(chat);
+                    ChatJava chatJava = snapshot.getValue(ChatJava.class);
+                    if(chatJava.getReceiver().equals(myid) && chatJava.getSender().equals(userid) ||
+                            chatJava.getReceiver().equals(userid) && chatJava.getSender().equals(myid)){
+                        mChatJava.add(chatJava);
                     }
 
-                    messageAdapter = new MessageAdapter(MessageActivity.this, mChat,imageurl);
+                    messageAdapter = new MessageAdapter(MessageActivity.this, mChatJava,imageurl);
                     recyclerView.setAdapter(messageAdapter);
                 }
             }

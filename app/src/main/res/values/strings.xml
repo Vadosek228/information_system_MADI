@@ -19,4 +19,13 @@
     <string name="profile_hint_about">О себе</string>
     <string name="profile_hint_last_name">Фамилия</string>
     <string name="profile_hint_first_name">Имя</string>
+    <string name="search_string">Поиск...</string>
+
+    <string-array name="statusUserList">
+        <item>Преподаватель</item>
+        <item>Студент</item>
+        <item>Абитуриент</item>
+        <item>Сотрудник дэканата</item>
+    </string-array>
+
 </resources>

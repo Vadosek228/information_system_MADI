@@ -11,7 +11,7 @@ import ru.vladislav_akulinin.mychat_version_2.model.Profile
 
 //реализация сохранения данных в ПреференсисРепозитории
 object PreferencesRepository {
-    private const val FIRST_NAME = "FIRST_NAME"
+    private const val FIRST_NAME = "first_name"
     private const val LAST_NAME = "LAST_NAME"
     private const val ABOUT = "ABOUT"
     private const val REPOSITORY = "REPOSITORY"
