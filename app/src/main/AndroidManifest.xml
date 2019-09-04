@@ -24,8 +24,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.RegisterActivityJava"
             android:parentActivityName=".ui.activity.StartActivity" />
+        <activity android:name=".ui.activity.RegisterActivity"
+            android:parentActivityName=".ui.activity.RegisterActivity"/>
         <activity
             android:name=".activity.MainActivityJava"
             android:screenOrientation="portrait" />

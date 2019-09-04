@@ -7,7 +7,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_start.*
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.activity.RegisterActivity
 
 class StartActivity : AppCompatActivity() {
 

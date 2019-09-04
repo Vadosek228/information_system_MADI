@@ -27,7 +27,7 @@ import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
 //адаптер для вывода всех пользователей
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class UserAdapterJava extends RecyclerView.Adapter<UserAdapterJava.ViewHolder> {
 
     private Context mContext;
     private List<UserJava> mUserJavas;
@@ -38,7 +38,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     //для вывода начала сообщения в выборах чата
     String theLastMessage;
 
-    public UserAdapter (Context mContext, List<UserJava> mUserJavas, boolean ischat){
+    public UserAdapterJava(Context mContext, List<UserJava> mUserJavas, boolean ischat){
         this.mContext = mContext;
         this.mUserJavas = mUserJavas;
         this.ischat = ischat;
@@ -48,7 +48,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
-        return new UserAdapter.ViewHolder(view);
+        return new UserAdapterJava.ViewHolder(view);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             profile_image = itemView.findViewById(R.id.profile_image);
             img_on = itemView.findViewById(R.id.img_on);
             img_off = itemView.findViewById(R.id.img_off);
-            last_msg = itemView.findViewById(R.id.last_msg);
+//            last_msg = itemView.findViewById(R.id.last_msg);
         }
     }
 

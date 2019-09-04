@@ -1,5 +1,6 @@
 package ru.vladislav_akulinin.mychat_version_2.ui.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragment
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ProfileFragment
-import ru.vladislav_akulinin.mychat_version_2.fragments.UsersFragment
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.UsersFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -113,6 +114,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("PrivateResource")
     private fun addFragment(fragment: Fragment) {
         supportFragmentManager
                 .beginTransaction()

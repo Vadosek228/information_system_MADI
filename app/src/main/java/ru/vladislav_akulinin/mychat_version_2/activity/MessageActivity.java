@@ -125,7 +125,7 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        reference = FirebaseDatabase.getInstance().getReference("UserJava").child(userid);
+        reference = FirebaseDatabase.getInstance().getReference("UserNew").child(userid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -215,7 +215,7 @@ public class MessageActivity extends AppCompatActivity {
         //для уведомлений о сообщениях
         final String msg = message;
 
-        reference = FirebaseDatabase.getInstance().getReference("UserJava").child(fuser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -303,7 +303,7 @@ public class MessageActivity extends AppCompatActivity {
 
     //для пользовательского статуса
     private void status(String status){
-        reference = FirebaseDatabase.getInstance().getReference("UserJava").child(fuser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("status", status);

@@ -24,15 +24,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter;
+import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapterJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
-public class UsersFragment extends Fragment {
+public class UsersFragmentJava extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private UserAdapter userAdapter;
+    private UserAdapterJava userAdapterJava;
     private List<UserJava> mUserJavas;
 
     EditText search_user;
@@ -77,7 +77,7 @@ public class UsersFragment extends Fragment {
     private void searchUser(String s) {
 
         final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
-        Query query = FirebaseDatabase.getInstance().getReference("User").orderByChild("search")
+        Query query = FirebaseDatabase.getInstance().getReference("UserNew").orderByChild("search")
                 .startAt(s)
                 .endAt(s+"\uf8ff");
 
@@ -95,8 +95,8 @@ public class UsersFragment extends Fragment {
                     }
                 }
 
-                userAdapter = new UserAdapter(getContext(), mUserJavas, false);
-                recyclerView.setAdapter(userAdapter); //установить новое значение в ресайкл из поиска
+                userAdapterJava = new UserAdapterJava(getContext(), mUserJavas, false);
+                recyclerView.setAdapter(userAdapterJava); //установить новое значение в ресайкл из поиска
             }
 
             @Override
@@ -110,7 +110,7 @@ public class UsersFragment extends Fragment {
     private void readUsers() {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserNew");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -128,8 +128,8 @@ public class UsersFragment extends Fragment {
                         }
                     }
 
-                    userAdapter = new UserAdapter(getContext(), mUserJavas, false);
-                    recyclerView.setAdapter(userAdapter);
+                    userAdapterJava = new UserAdapterJava(getContext(), mUserJavas, false);
+                    recyclerView.setAdapter(userAdapterJava);
                 }
             }
 

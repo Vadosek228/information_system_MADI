@@ -21,7 +21,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter;
+import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapterJava;
 import ru.vladislav_akulinin.mychat_version_2.model.Chat;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Token;
@@ -31,7 +31,7 @@ public class ChatsFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private UserAdapter userAdapter;
+    private UserAdapterJava userAdapterJava;
     private List<UserJava> mUserJavas;
 
     FirebaseUser fuser;
@@ -128,8 +128,8 @@ public class ChatsFragment extends Fragment {
 //                        }
 //                    }
 //                }
-//                userAdapter = new UserAdapter(getContext(), mUserJavas,true);
-//                recyclerView.setAdapter(userAdapter);
+//                userAdapterJava = new UserAdapterJava(getContext(), mUserJavas,true);
+//                recyclerView.setAdapter(userAdapterJava);
 //            }
 //
 //            @Override
@@ -144,7 +144,7 @@ public class ChatsFragment extends Fragment {
     private void readChats(){ //читать сообщения
         mUserJavas = new ArrayList<>();
 
-        reference = FirebaseDatabase.getInstance().getReference("UserJava");
+        reference = FirebaseDatabase.getInstance().getReference("UserNew");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -170,8 +170,8 @@ public class ChatsFragment extends Fragment {
                     }
                 }
                                                                         //try - для статуса
-                userAdapter = new UserAdapter(getContext(), mUserJavas, true);
-                recyclerView.setAdapter(userAdapter);
+                userAdapterJava = new UserAdapterJava(getContext(), mUserJavas, true);
+                recyclerView.setAdapter(userAdapterJava);
             }
 
             @Override

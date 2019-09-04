@@ -24,7 +24,7 @@ import java.util.HashMap;
 import ru.vladislav_akulinin.mychat_version_2.R;
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivityJava extends AppCompatActivity {
 
     MaterialEditText username, email, password;
     Button btn_register;
@@ -59,9 +59,9 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //для выполнения операций над String// проверка на пустоту
                 if(TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
-                    Toast.makeText(RegisterActivity.this, "Должны быть заполнены все поля", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivityJava.this, "Должны быть заполнены все поля", Toast.LENGTH_SHORT).show();
                 } else if(txt_password.length() < 6){
-                    Toast.makeText(RegisterActivity.this, "Длина пароля должна быть больше 6 символов", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivityJava.this, "Длина пароля должна быть больше 6 символов", Toast.LENGTH_SHORT).show();
                 } else {
                     register(txt_username, txt_email, txt_password);
                 }
@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(RegisterActivityJava.this, MainActivity.class);
                                         //таск для вызываемого Activity будет очищен, а вызываемое Activity станет в нем корневым.
                                         //станет значением новой задачи в стеке итсории
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);//применение флагов
@@ -107,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Вы не можете зарегистрироваться с данным Email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivityJava.this, "Вы не можете зарегистрироваться с данным Email", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
