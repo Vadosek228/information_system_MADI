@@ -12,14 +12,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_login2.*
 import ru.vladislav_akulinin.mychat_version_2.R
 
 class LoginActivity : AppCompatActivity() {
 
-    internal lateinit var userEmail: EditText
-    internal lateinit var userPass: EditText
-    internal lateinit var btn_login: Button
-    internal lateinit var forgot_password: TextView //сброс пароля
+    private lateinit var userEmail: EditText
+    private lateinit var userPass: EditText
+    private lateinit var btnLogin: Button
+    private lateinit var forgotPassword: TextView //сброс пароля
 
     internal lateinit var auth: FirebaseAuth
 
@@ -39,24 +40,28 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         userEmail = findViewById(R.id.user_mail)
         userPass = findViewById(R.id.user_pass)
-        btn_login = findViewById(R.id.sign_in)
-        forgot_password = findViewById(R.id.btn_registration)
+        btnLogin = findViewById(R.id.sign_in)
+        forgotPassword = findViewById(R.id.btn_registration)
 
-        btn_login.setOnClickListener {
+        btnLogin.setOnClickListener {
             signIn()
+        }
+
+        btn_registration.setOnClickListener{
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
     }
 
     private fun signIn() {
-        val txt_email = userEmail.text?.toString()
-        val txt_password = userPass.text?.toString()
+        val txtEmail = userEmail.text?.toString()
+        val txtPassword = userPass.text?.toString()
 
-        if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
+        if (TextUtils.isEmpty(txtEmail) || TextUtils.isEmpty(txtPassword)) {
             Toast.makeText(this@LoginActivity, "Нужно заполнить все поля", Toast.LENGTH_SHORT).show()
         } else {
-            if (txt_email != null) {
-                if (txt_password != null) {
-                    auth.signInWithEmailAndPassword(txt_email, txt_password)
+            if (txtEmail != null) {
+                if (txtPassword != null) {
+                    auth.signInWithEmailAndPassword(txtEmail, txtPassword)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     val intent = Intent(this@LoginActivity, MainActivity::class.java)

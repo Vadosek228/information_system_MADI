@@ -11,6 +11,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_profile_new.view.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.User
+import ru.vladislav_akulinin.mychat_version_2.utils.Utils
 
 class ProfileFragment : Fragment() {
 
@@ -35,14 +36,13 @@ class ProfileFragment : Fragment() {
 
             @SuppressLint("SetTextI18n")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 val myProfile = dataSnapshot.getValue(User::class.java)
 
                 view.tv_nick_name.text = myProfile?.firstName + " " + myProfile?.lastName
                 view.tv_rank.text = myProfile?.statusUser
-
                 view.et_last_name.setText(myProfile?.lastName)
                 view.et_first_name.setText(myProfile?.firstName)
+                view.iv_avatar.updateAvatar(Utils.toInitials(myProfile?.firstName, myProfile?.lastName))
             }
         })
     }

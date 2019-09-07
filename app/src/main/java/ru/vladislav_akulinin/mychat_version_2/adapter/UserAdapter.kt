@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.vladislav_akulinin.mychat_version_2.R
@@ -30,6 +31,7 @@ class UserAdapter(internal var context: Context?): RecyclerView.Adapter<UserAdap
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal var userName: TextView = itemView.findViewById(R.id.username)
         internal var statusUser: TextView = itemView.findViewById(R.id.status_user)
+        internal var profileImage: ImageView = itemView.findViewById(R.id.profile_image)
     }
 
     fun addAll(newUser:List<User>){

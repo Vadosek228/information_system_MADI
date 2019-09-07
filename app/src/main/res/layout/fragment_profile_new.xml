@@ -160,6 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Vlad"
+                android:textColor="@color/color_primary"
                 android:inputType="textPersonName"
                 android:imeOptions="actionNext"
                 android:hint="@string/profile_hint_first_name"/>
@@ -212,6 +213,7 @@
                 style="@style/Profile.EditText.MultiLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/color_primary"
                 android:hint="@string/profile_hint_about"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -243,6 +245,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textUri"
+                android:textColor="@color/color_primary"
                 android:imeOptions="actionDone"
                 android:hint="@string/profile_hint_repository"/>
 
