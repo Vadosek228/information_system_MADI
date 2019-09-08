@@ -14,8 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragment
@@ -25,7 +24,7 @@ import ru.vladislav_akulinin.mychat_version_2.ui.fragments.UsersFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout // меню слева
+    private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var toolbar: Toolbar
 
@@ -34,8 +33,7 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var profile_image: CircleImageView
     internal lateinit var username: TextView
 
-    private var firebaseUser: FirebaseUser? = null //предоставляет информацию о профиле пользователя, содержит методы для изменения и получения информации
-    private var reference: DatabaseReference? = null
+    private var firebaseUser = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         container = findViewById(R.id.container)
 
-        val fragment = UsersFragment() //.newInstance()
+        val fragment = UsersFragment()
         addFragment(fragment)
 
     }
@@ -76,18 +74,39 @@ class MainActivity : AppCompatActivity() {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true
         }
-
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setStatus(status: String) {
+        FirebaseDatabase.getInstance().reference
+                .child("UserNew")
+                .child(firebaseUser!!.uid)
+                .child("status")
+                .setValue(status)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setStatus("online")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        setStatus("offline")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        setStatus("offline")
     }
 
     private fun setNavigateView() {
         val navigationView = findViewById<NavigationView>(R.id.navigation)
 
         navigationView.setNavigationItemSelectedListener { item ->
-
             when(item.itemId) {
                 R.id.nav_contacts -> {
-                    val fragment = UsersFragment()  //.Companion.newInstance()
+                    val fragment = UsersFragment()
                     addFragment(fragment)
                     toolbar.setTitle(R.string.menu_contacts)
                 }
