@@ -22,7 +22,6 @@ class ProfileFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         val view = inflater.inflate(R.layout.fragment_profile_new, container, false)
 
         uploadYourData(view)
@@ -39,7 +38,7 @@ class ProfileFragment : Fragment() {
                 val myProfile = dataSnapshot.getValue(User::class.java)
 
                 view.tv_nick_name.text = myProfile?.firstName + " " + myProfile?.lastName
-                view.tv_rank.text = myProfile?.status //User
+                view.tv_rank.text = myProfile?.statusUser
                 view.et_last_name.setText(myProfile?.lastName)
                 view.et_first_name.setText(myProfile?.firstName)
                 view.iv_avatar.updateAvatar(Utils.toInitials(myProfile?.firstName, myProfile?.lastName))
