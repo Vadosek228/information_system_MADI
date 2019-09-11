@@ -10,25 +10,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.model.User
+import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 
 class UserAdapter(internal var context: Context?): RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-    private var userList: MutableList<User> = ArrayList()
+    private var userModelList: MutableList<UserModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false)
         return UserViewHolder(itemView)
     }
 
-    override fun getItemCount(): Int = userList.size
+    override fun getItemCount(): Int = userModelList.size
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.userName.text = userList[position].firstName + " " + userList[position].lastName
-        holder.statusUser.text = userList[position].statusUser
+        holder.userName.text = userModelList[position].firstName + " " + userModelList[position].lastName
+        holder.statusUser.text = userModelList[position].statusUser
 
-        if(userList[position].status == "offline") holder.statusOff.visibility = View.VISIBLE
+        if(userModelList[position].status == "offline") holder.statusOff.visibility = View.VISIBLE
         else holder.statusOn.visibility = View.VISIBLE
     }
 
@@ -41,13 +41,13 @@ class UserAdapter(internal var context: Context?): RecyclerView.Adapter<UserAdap
         internal var statusOff: CircleImageView = itemView.findViewById(R.id.img_off)
     }
 
-    fun addAll(newUser:List<User>){
-        val init = userList.size
-        userList.addAll(newUser)
-        notifyItemRangeChanged(init, newUser.size)
+    fun addAll(newUserModel:List<UserModel>){
+        val init = userModelList.size
+        userModelList.addAll(newUserModel)
+        notifyItemRangeChanged(init, newUserModel.size)
     }
 
     fun removeLastItem(){
-        userList.removeAt(userList.size - 1)
+        userModelList.removeAt(userModelList.size - 1)
     }
 }

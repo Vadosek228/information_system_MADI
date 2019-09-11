@@ -3,7 +3,7 @@ package ru.vladislav_akulinin.mychat_version_2.model
 import ru.vladislav_akulinin.mychat_version_2.utils.Utils
 
 
-data class Profile (
+data class ProfileModel (
     val firstName : String,
     val lastName : String,
     val about : String,

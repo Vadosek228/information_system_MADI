@@ -27,7 +27,7 @@ import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Token;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
-public class ChatsFragment extends Fragment {
+public class ChatsFragmentJava extends Fragment {
 
     private RecyclerView recyclerView;
 

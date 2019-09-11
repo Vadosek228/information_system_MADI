@@ -1,6 +1,6 @@
 package ru.vladislav_akulinin.mychat_version_2.model
 
-data class User(
+data class UserModel(
         var id: String? = null,
         var firstName: String? = null,
         var lastName: String? = null,

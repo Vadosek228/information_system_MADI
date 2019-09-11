@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.vladislav_akulinin.mychat_version_2.adapter.ViewPagerAdapter;
-import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragment;
+import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragmentJava;
 import ru.vladislav_akulinin.mychat_version_2.fragments.ProfileFragmentJava;
 import ru.vladislav_akulinin.mychat_version_2.fragments.UsersFragmentJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
@@ -54,7 +54,7 @@ public class MainActivityJava extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser(); //получаем текущего пользователя, вошедшего в систему
         reference = FirebaseDatabase
                 .getInstance() //получить ссылку на местоположение
-                .getReference("User") //где хранятся
+                .getReference("UserModel") //где хранятся
                 .child(firebaseUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -87,7 +87,7 @@ public class MainActivityJava extends AppCompatActivity {
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragments(new ChatsFragment(), "Чаты");
+        viewPagerAdapter.addFragments(new ChatsFragmentJava(), "Чаты");
         viewPagerAdapter.addFragments(new UsersFragmentJava(), "Пользователи");
         viewPagerAdapter.addFragments(new ProfileFragmentJava(), "Профиль");
 

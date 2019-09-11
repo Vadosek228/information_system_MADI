@@ -2,12 +2,11 @@
 
 package ru.vladislav_akulinin.mychat_version_2.repositories
 
-import android.app.WallpaperInfo
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
 import ru.vladislav_akulinin.mychat_version_2.App
-import ru.vladislav_akulinin.mychat_version_2.model.Profile
+import ru.vladislav_akulinin.mychat_version_2.model.ProfileModel
 
 //реализация сохранения данных в ПреференсисРепозитории
 object PreferencesRepository {
@@ -30,7 +29,7 @@ object PreferencesRepository {
 
     fun getAppTheme() : Int = pref.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_NO)
 
-    fun getProfile(): Profile = Profile(
+    fun getProfile(): ProfileModel = ProfileModel(
         pref.getString(FIRST_NAME, "")!!,
         pref.getString(LAST_NAME, "")!!,
         pref.getString(ABOUT, "")!!,
@@ -39,8 +38,8 @@ object PreferencesRepository {
         pref.getInt(RESPECT, 0)
     )
 
-    fun saveProfile(profile: Profile) {
-        with(profile){
+    fun saveProfile(profileModel: ProfileModel) {
+        with(profileModel){
             putValue(FIRST_NAME to firstName)
             putValue(LAST_NAME to lastName)
             putValue(ABOUT to about)

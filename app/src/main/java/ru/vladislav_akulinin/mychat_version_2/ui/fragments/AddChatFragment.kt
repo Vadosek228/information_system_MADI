@@ -3,24 +3,24 @@ package ru.vladislav_akulinin.mychat_version_2.ui.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_users.view.*
+import kotlinx.android.synthetic.main.toolbar.*
+
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter
-import com.google.firebase.database.*
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DataSnapshot
-import kotlinx.android.synthetic.main.fragment_users.view.*
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
-
-class UsersFragment : Fragment() {
+class AddChatFragment : Fragment() {
 
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -31,15 +31,13 @@ class UsersFragment : Fragment() {
     var last_visibe_item = 0
     var isLoading = false
 
-    companion object {
-        const val USER_PATH_KEY = "UserNew"
-        const val SEARCH_KEY = "search"
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_add_chat, container, false)
 
-        val view = inflater.inflate(R.layout.fragment_users, container, false)
+        val parentActivity : MainActivity = activity as MainActivity // parent reference
+        parentActivity.setToolbar()
+        parentActivity.toolbar.title = "Добавить чат"
 
         val layoutManager = LinearLayoutManager(context)
         view.recycler_view.layoutManager = layoutManager
@@ -87,8 +85,8 @@ class UsersFragment : Fragment() {
     //для поиска пользователя
     private fun searchUser(search: String, view: View) {
         val query: Query = FirebaseDatabase.getInstance().reference
-                .child(USER_PATH_KEY)
-                .orderByChild(SEARCH_KEY)
+                .child(UsersFragment.USER_PATH_KEY)
+                .orderByChild(UsersFragment.SEARCH_KEY)
                 .startAt(search)
                 .endAt(search + "\uf8ff")
 
@@ -119,7 +117,7 @@ class UsersFragment : Fragment() {
 
     private fun getUsers() {
         val query: Query = FirebaseDatabase.getInstance().reference
-                .child(USER_PATH_KEY)
+                .child(UsersFragment.USER_PATH_KEY)
                 .orderByKey()
 
         query.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -144,12 +142,4 @@ class UsersFragment : Fragment() {
             }
         })
     }
-
-    //обновление данных
-    private fun refreshData() {
-        userAdapter.removeLastItem()
-        userAdapter.notifyDataSetChanged()
-        getUsers()
-    }
-
 }

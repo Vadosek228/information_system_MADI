@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.vladislav_akulinin.mychat_version_2.model.Profile
+import ru.vladislav_akulinin.mychat_version_2.model.ProfileModel
 import ru.vladislav_akulinin.mychat_version_2.repositories.PreferencesRepository
 
 class ProfileViewModel : ViewModel() {
 
     private val repository: PreferencesRepository = PreferencesRepository
-    private val profileDate = MutableLiveData<Profile>()
+    private val profileDate = MutableLiveData<ProfileModel>()
     private val appTheme = MutableLiveData<Int>()
     private val repositoryError = MutableLiveData<Boolean>()
     private val isRepoError = MutableLiveData<Boolean>()
@@ -27,7 +27,7 @@ class ProfileViewModel : ViewModel() {
         Log.d("M_ProfileViewModel", "view model cleared")
     }
 
-    fun getProfileData() : LiveData<Profile> = profileDate
+    fun getProfileData() : LiveData<ProfileModel> = profileDate
 
     fun getTheme() : LiveData<Int> = appTheme
 
@@ -35,9 +35,9 @@ class ProfileViewModel : ViewModel() {
 
     fun getIsRepoError():LiveData<Boolean> = isRepoError
 
-    fun saveProfileData(profile:Profile){
-        repository.saveProfile(profile)
-        profileDate.value = profile
+    fun saveProfileData(profileModel:ProfileModel){
+        repository.saveProfile(profileModel)
+        profileDate.value = profileModel
     }
 
     fun switchTheme() {

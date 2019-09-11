@@ -16,10 +16,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.nav_header_main.*
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragment
-import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ProfileFragment
-import ru.vladislav_akulinin.mychat_version_2.ui.fragments.UsersFragment
+import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +34,9 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var username: TextView
 
     private var firebaseUser = FirebaseAuth.getInstance().currentUser
+    private var firebaseDatabase = FirebaseDatabase.getInstance().reference
+            .child("UserNew")
+            .child(firebaseUser!!.uid)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +57,10 @@ class MainActivity : AppCompatActivity() {
         val fragment = UsersFragment()
         addFragment(fragment)
 
+        getUserData()
     }
 
-    private fun setToolbar() {
+    fun setToolbar() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
     }
@@ -78,11 +82,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setStatus(status: String) {
-        FirebaseDatabase.getInstance().reference
-                .child("UserNew")
-                .child(firebaseUser!!.uid)
+        firebaseDatabase
                 .child("status")
                 .setValue(status)
+    }
+
+    private fun getUserData(){
+        firebaseDatabase.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {}
+
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val myProfile = dataSnapshot.getValue(UserModel::class.java)
+                tv_username_nav_header.text = myProfile?.firstName + " " + myProfile?.lastName
+            }
+        })
     }
 
     override fun onResume() {
@@ -115,6 +129,16 @@ class MainActivity : AppCompatActivity() {
                     addFragment(fragment)
                     toolbar.setTitle(R.string.menu_chats)
                 }
+                R.id.nav_load -> {
+                    val fragment = LoadFragment()
+                    addFragment(fragment)
+                    toolbar.setTitle(R.string.menu_load)
+                }
+                R.id.nav_library -> {
+                    val fragment = LibraryFragment()
+                    addFragment(fragment)
+                    toolbar.setTitle(R.string.menu_library)
+                }
                 R.id.nav_profile -> {
                     val fragment = ProfileFragment()
                     addFragment(fragment)
@@ -142,5 +166,4 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .commit()
     }
-
 }

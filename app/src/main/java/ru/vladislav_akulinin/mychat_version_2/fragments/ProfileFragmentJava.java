@@ -65,7 +65,7 @@ public class ProfileFragmentJava extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("UserModel").child(fuser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -152,7 +152,7 @@ public class ProfileFragmentJava extends Fragment {
                         Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
-                        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
+                        reference = FirebaseDatabase.getInstance().getReference("UserModel").child(fuser.getUid());
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("imageURL", mUri);
                         reference.updateChildren(map);
