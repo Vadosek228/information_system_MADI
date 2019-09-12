@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.model
+package ru.vladislav_akulinin.mychat_version_2.chat
 
 data class ChatModel(
         val uid: String? = null,

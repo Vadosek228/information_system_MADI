@@ -19,6 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.nav_header_main.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.chat.ChatsFragment
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.*
 
 

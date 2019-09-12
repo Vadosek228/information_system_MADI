@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.ui.fragments
+package ru.vladislav_akulinin.mychat_version_2.chat
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +20,19 @@ import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.UsersFragment
 
-class AddChatFragment : Fragment() {
+class AddChatFragment : Fragment(), OnItemClickedListener {
+
+
+    override fun onLongClicked(userModel: UserModel): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onClicked(userModel: UserModel) {
+        Toast.makeText(context, "Tets", Toast.LENGTH_SHORT).show()
+    }
+
 
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
@@ -30,6 +42,24 @@ class AddChatFragment : Fragment() {
     var total_item = 0
     var last_visibe_item = 0
     var isLoading = false
+
+//    private var chatListViewModel: ChatViewModel? = null
+//    private var inSearchMode: Boolean = false
+
+//    private val onUserListClickedListener =
+//            object : OnItemClickedListener<ChatViewModel> {
+//                override fun onClicked(item: ChatViewModel) {
+//                    chatListViewModel?.onTapItem(item)
+//                }
+//
+//                override fun onLongClicked(item: ChatViewModel): Boolean {
+//                    return if (!inSearchMode) {
+//                        chatListViewModel?.onLongTapItem(item)
+//                        true
+//                    } else
+//                        false
+//                }
+//            }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -46,6 +76,18 @@ class AddChatFragment : Fragment() {
         view.recycler_view.addItemDecoration(dividerItemDecoration)
 
         userAdapter = UserAdapter(context)
+//        userAdapter.registerOnItemCallBack(this)
+
+        userAdapter.clickListener = object : OnItemClickedListener{
+            override fun onClicked(userModel: UserModel) {
+                Toast.makeText(context, "${userModel.firstName}", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onLongClicked(userModel: UserModel): Boolean {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        }
+
         view.recycler_view.adapter = userAdapter
 
         getUsers()

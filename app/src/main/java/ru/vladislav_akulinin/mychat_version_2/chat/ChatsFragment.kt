@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.ui.fragments
+package ru.vladislav_akulinin.mychat_version_2.chat
 
 import android.annotation.SuppressLint
 import android.os.Bundle

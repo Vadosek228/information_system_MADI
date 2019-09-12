@@ -17,6 +17,8 @@ import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_users.view.*
+import ru.vladislav_akulinin.mychat_version_2.chat.ChatViewModel
+import ru.vladislav_akulinin.mychat_version_2.chat.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 
 
@@ -35,6 +37,24 @@ class UsersFragment : Fragment() {
         const val USER_PATH_KEY = "UserNew"
         const val SEARCH_KEY = "search"
     }
+
+//    private var chatListViewModel: ChatViewModel? = null
+//    private var inSearchMode: Boolean = false
+//
+//    private val onUserListClickedListener =
+//            object : OnItemClickedListener<ChatViewModel> {
+//                override fun onClicked(item: ChatViewModel) {
+//                    chatListViewModel?.onTapItem(item)
+//                }
+//
+//                override fun onLongClicked(item: ChatViewModel): Boolean {
+//                    return if (!inSearchMode) {
+//                        chatListViewModel?.onLongTapItem(item)
+//                        true
+//                    } else
+//                        false
+//                }
+//            }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
