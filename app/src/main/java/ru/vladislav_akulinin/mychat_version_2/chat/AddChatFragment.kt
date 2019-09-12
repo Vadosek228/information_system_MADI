@@ -1,5 +1,7 @@
 package ru.vladislav_akulinin.mychat_version_2.chat
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,16 +25,6 @@ import ru.vladislav_akulinin.mychat_version_2.ui.fragments.UsersFragment
 
 class AddChatFragment : Fragment(), OnItemClickedListener {
 
-
-    override fun onLongClicked(userModel: UserModel): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onClicked(userModel: UserModel) {
-        Toast.makeText(context, "${userModel.firstName}", Toast.LENGTH_SHORT).show()
-    }
-
-
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
     private lateinit var userAdapter: UserAdapter
@@ -42,24 +33,6 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
     var total_item = 0
     var last_visibe_item = 0
     var isLoading = false
-
-//    private var chatListViewModel: ChatViewModel? = null
-//    private var inSearchMode: Boolean = false
-
-//    private val onUserListClickedListener =
-//            object : OnItemClickedListener<ChatViewModel> {
-//                override fun onClicked(item: ChatViewModel) {
-//                    chatListViewModel?.onTapItem(item)
-//                }
-//
-//                override fun onLongClicked(item: ChatViewModel): Boolean {
-//                    return if (!inSearchMode) {
-//                        chatListViewModel?.onLongTapItem(item)
-//                        true
-//                    } else
-//                        false
-//                }
-//            }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -112,6 +85,35 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
         })
 
         return view
+    }
+
+    override fun onLongClicked(userModel: UserModel): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onClicked(userModel: UserModel) {
+        createNewChat(userModel)
+    }
+
+    @SuppressLint("PrivateResource")
+    private fun createNewChat(userModel: UserModel){
+        val intent = Intent().putExtra("userid", userModel.id)
+
+        fragmentManager!!
+                .beginTransaction()
+                .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+                .replace(R.id.container, MessageFragment(intent))
+                .addToBackStack(null)
+                .commit()
+
+//        firebaseDatabase
+//                    .child("Chats")
+//                    .push()
+//                    .setValue(MessageModel(input.text.toString(),
+//                            FirebaseAuth.getInstance()
+//                                    .currentUser!!
+//                                    .displayName)
+//                    )
     }
 
     //для поиска пользователя

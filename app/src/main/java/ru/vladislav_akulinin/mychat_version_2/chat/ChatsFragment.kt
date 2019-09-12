@@ -20,10 +20,11 @@ import com.google.firebase.database.FirebaseDatabase
 class ChatsFragment : Fragment() {
 
     private lateinit var userAdapter: UserAdapter
-    private var userModelList: MutableList<UserModel>? = null
 
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
-    private val firebaseDatabase: Query = FirebaseDatabase.getInstance().reference
+
+    private lateinit var usersList: MutableList<String>
+    private lateinit var mUser: MutableList<UserModel>
 
 
     @SuppressLint("PrivateResource")
@@ -33,10 +34,13 @@ class ChatsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chats, container, false)
 
         val layoutManager = LinearLayoutManager(context)
-        view.recycler_view.layoutManager = layoutManager
+        view.recycler_view_list_chat.layoutManager = layoutManager
 
-        val dividerItemDecoration = DividerItemDecoration(view.recycler_view.context, layoutManager.orientation)
-        view.recycler_view.addItemDecoration(dividerItemDecoration)
+        val dividerItemDecoration = DividerItemDecoration(view.recycler_view_list_chat.context, layoutManager.orientation)
+        view.recycler_view_list_chat.addItemDecoration(dividerItemDecoration)
+
+        usersList = ArrayList()
+        newChat(view)
 
         val fabCreateNewChar: View = view.findViewById(R.id.fab_create_chat)
         fabCreateNewChar.setOnClickListener {
@@ -51,59 +55,66 @@ class ChatsFragment : Fragment() {
         return view
     }
 
-    private fun newChat(fabCreateNewChar: View, view: View) {
+    private fun newChat(view: View) {
 
+        val firebaseDatabase: Query = FirebaseDatabase.getInstance().reference.child("Chats")
+        firebaseDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                usersList.clear()
 
-//        fabCreateNewChar.setOnClickListener {
-//            val input = view.findViewById(R.id.input) as EditText
-//
-//            firebaseDatabase
-//                    .child("Chats")
-//                    .push()
-//                    .setValue(ChatModel(input.text.toString(),
-//                            FirebaseAuth.getInstance()
-//                                    .currentUser!!
-//                                    .displayName)
-//                    )
-//
-//            input.setText("")
-//        }
+                for (snapshot in dataSnapshot.children) {
+                    val chat = snapshot.getValue(MessageModel::class.java)
+
+                    if (chat!!.sender == firebaseUser?.uid) {
+                        chat.receiver?.let { usersList.add(it) }
+                    }
+                    if (chat.receiver == firebaseUser?.uid) {
+                        chat.sender?.let { usersList.add(it) }
+                    }
+                }
+
+                readChats(view)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
     }
 
-//    private fun readChats() {
-//        userModelList = ArrayList<User>()
-//
-//        reference = FirebaseDatabase.getInstance().getReference("UserNew")
-//
-//        reference.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                mUserJavas.clear()
-//
-//                for (snapshot in dataSnapshot.children) {
-//                    val userJava = snapshot.getValue(UserJava::class.java)
-//
-//                    //показывать 1 пользователя из чатов
-//                    for (id in usersList) {
-//                        if (userJava!!.id == id) {
-//                            if (mUserJavas.isEmpty()) {
-//                                for (userJava1 in mUserJavas) {
-//                                    if (userJava.id != userJava1.getId()) {
-//                                        mUserJavas.add(userJava)
-//                                    }
-//                                }
-//                            } else {
-//                                mUserJavas.add(userJava)
-//                            }
-//                        }
-//                    }
-//                }
-//                userAdapterJava = UserAdapterJava(context, mUserJavas, true)
-//                recyclerView.setAdapter(userAdapterJava)
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//
-//            }
-//        })
-//    }
+    private fun readChats(view: View) {
+        mUser = ArrayList()
+        val firebaseDatabase: Query = FirebaseDatabase.getInstance().reference.child("UserNew")
+
+        firebaseDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                mUser.clear()
+
+                for (snapshot in dataSnapshot.children) {
+                    val user = snapshot.getValue(UserModel::class.java)
+
+                    //показывать 1 пользователя из чатов
+                    for (id in usersList) {
+                        if (user!!.id == id) {
+                            if (mUser.isEmpty()) {
+                                for (userModel in mUser) {
+                                    if (user.id != userModel.id) {
+                                        mUser.add(user)
+                                    }
+                                }
+                            } else {
+                                mUser.add(user)
+                            }
+                        }
+                    }
+                }
+                userAdapter = UserAdapter(context)
+                view.recycler_view_list_chat.adapter = userAdapter
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
+    }
 }

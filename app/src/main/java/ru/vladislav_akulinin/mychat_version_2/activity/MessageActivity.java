@@ -33,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import ru.vladislav_akulinin.mychat_version_2.notifications.interface_notification.APIService;
-import ru.vladislav_akulinin.mychat_version_2.adapter.MessageAdapter;
+import ru.vladislav_akulinin.mychat_version_2.adapter.MessageAdapterJava;
 import ru.vladislav_akulinin.mychat_version_2.model.ChatJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Client;
@@ -52,7 +52,7 @@ public class MessageActivity extends AppCompatActivity {
     ImageButton btn_send;
     EditText text_send;
 
-    MessageAdapter messageAdapter;
+    MessageAdapterJava messageAdapterJava;
     List<ChatJava> mChatJava;
 
     RecyclerView recyclerView;
@@ -289,8 +289,8 @@ public class MessageActivity extends AppCompatActivity {
                         mChatJava.add(chatJava);
                     }
 
-                    messageAdapter = new MessageAdapter(MessageActivity.this, mChatJava,imageurl);
-                    recyclerView.setAdapter(messageAdapter);
+                    messageAdapterJava = new MessageAdapterJava(MessageActivity.this, mChatJava,imageurl);
+                    recyclerView.setAdapter(messageAdapterJava);
                 }
             }
 

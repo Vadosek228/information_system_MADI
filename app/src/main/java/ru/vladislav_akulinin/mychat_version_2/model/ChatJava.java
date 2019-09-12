@@ -2,7 +2,7 @@ package ru.vladislav_akulinin.mychat_version_2.model;
 
 public class ChatJava {
 
-    private String sender; // отправитель
+    private String sender; //отправитель
     private String receiver; //получатель
     private String message;
     private boolean isseen;
