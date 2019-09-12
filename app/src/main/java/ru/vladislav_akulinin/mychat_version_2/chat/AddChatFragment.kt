@@ -30,7 +30,7 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
     }
 
     override fun onClicked(userModel: UserModel) {
-        Toast.makeText(context, "Tets", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "${userModel.firstName}", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -76,17 +76,7 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
         view.recycler_view.addItemDecoration(dividerItemDecoration)
 
         userAdapter = UserAdapter(context)
-//        userAdapter.registerOnItemCallBack(this)
-
-        userAdapter.clickListener = object : OnItemClickedListener{
-            override fun onClicked(userModel: UserModel) {
-                Toast.makeText(context, "${userModel.firstName}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onLongClicked(userModel: UserModel): Boolean {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        }
+        userAdapter.registerOnItemCallBack(this)
 
         view.recycler_view.adapter = userAdapter
 

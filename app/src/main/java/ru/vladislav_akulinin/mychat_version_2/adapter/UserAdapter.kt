@@ -17,21 +17,15 @@ class UserAdapter(
         internal var context: Context?
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-//    lateinit var clickListener: OnItemClickedListener
-    var clickListener: OnItemClickedListener? = null
-
-
+    private var clickListener: OnItemClickedListener? = null
     private var userModelList: MutableList<UserModel> = ArrayList()
 
-//    fun registerOnItemCallBack(clickListener: OnItemClickedListener) {
-//        this.clickListener = clickListener
-//    }
+    fun registerOnItemCallBack(clickListener: OnItemClickedListener) {
+        this.clickListener = clickListener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false)
-
-
-
         return UserViewHolder(itemView)
     }
 
