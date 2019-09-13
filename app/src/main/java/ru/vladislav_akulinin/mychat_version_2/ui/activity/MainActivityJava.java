@@ -24,9 +24,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.vladislav_akulinin.mychat_version_2.adapter.ViewPagerAdapter;
-import ru.vladislav_akulinin.mychat_version_2.fragments.ChatsFragmentJava;
-import ru.vladislav_akulinin.mychat_version_2.fragments.ProfileFragmentJava;
-import ru.vladislav_akulinin.mychat_version_2.fragments.UsersFragmentJava;
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ProfileFragmentJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
@@ -87,7 +85,7 @@ public class MainActivityJava extends AppCompatActivity {
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragments(new ChatsFragmentJava(), "Чаты");
+//        viewPagerAdapter.addFragments(new ChatsFragmentJava(), "Чаты");
         viewPagerAdapter.addFragments(new UsersFragmentJava(), "Пользователи");
         viewPagerAdapter.addFragments(new ProfileFragmentJava(), "Профиль");
 

@@ -21,6 +21,7 @@ import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.MessageFragment
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.UsersFragment
 
 class AddChatFragment : Fragment(), OnItemClickedListener {
