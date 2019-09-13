@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.activity;
+package ru.vladislav_akulinin.mychat_version_2.ui.activity;
 
 import androidx.annotation.NonNull;
 import com.google.android.material.tabs.TabLayout;
@@ -86,7 +86,7 @@ public class MainActivityJava extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 //        viewPagerAdapter.addFragments(new ChatsFragmentJava(), "Чаты");
-        viewPagerAdapter.addFragments(new UsersFragmentJava(), "Пользователи");
+//        viewPagerAdapter.addFragments(new UsersFragmentJava(), "Пользователи");
         viewPagerAdapter.addFragments(new ProfileFragmentJava(), "Профиль");
 
         viewPager.setAdapter(viewPagerAdapter);

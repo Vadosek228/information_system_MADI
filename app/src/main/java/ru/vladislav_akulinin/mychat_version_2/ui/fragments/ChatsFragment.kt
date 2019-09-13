@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.chat
+package ru.vladislav_akulinin.mychat_version_2.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -17,6 +17,7 @@ import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import com.google.firebase.database.FirebaseDatabase
+import ru.vladislav_akulinin.mychat_version_2.adapter.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.ChatListModel
 
 

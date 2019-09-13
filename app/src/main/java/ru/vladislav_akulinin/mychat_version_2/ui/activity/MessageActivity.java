@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.activity;
+package ru.vladislav_akulinin.mychat_version_2.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -42,7 +42,6 @@ import ru.vladislav_akulinin.mychat_version_2.notifications.MyResponse;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Sender;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Token;
 import ru.vladislav_akulinin.mychat_version_2.R;
-import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity;
 
 public class MessageActivity extends AppCompatActivity {
 

@@ -59,6 +59,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.0'
     implementation 'com.firebaseui:firebase-ui-database:5.1.0'
 
+    //lifecycle - для отказа от цизненного цикла и сохранения состояния
     implementation 'com.google.android.material:material:1.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 

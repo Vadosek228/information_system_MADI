@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".activity.MainActivityJava">
+    tools:context=".ui.activity.MainActivityJava">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

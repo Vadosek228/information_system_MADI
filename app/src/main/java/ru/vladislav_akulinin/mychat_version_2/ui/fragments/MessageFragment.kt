@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.chat
+package ru.vladislav_akulinin.mychat_version_2.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.fragment_message.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 import ru.vladislav_akulinin.mychat_version_2.R
+import ru.vladislav_akulinin.mychat_version_2.adapter.MessageAdapter
+import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import java.util.ArrayList

@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import ru.vladislav_akulinin.mychat_version_2.activity.MessageActivity;
+import ru.vladislav_akulinin.mychat_version_2.ui.activity.MessageActivity;
 
 public class MyFirebaseMessaging extends FirebaseMessagingService {
 

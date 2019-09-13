@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.chat
+package ru.vladislav_akulinin.mychat_version_2.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import ru.vladislav_akulinin.mychat_version_2.R
+import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
 
 class MessageAdapter : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
@@ -29,17 +30,17 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
         this.imageurl = imageurl
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (viewType == MSG_TYPE_RIGHT) {
             val view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, parent, false)
-            return MessageAdapter.ViewHolder(view)
+            return ViewHolder(view)
         } else {
             val view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_left, parent, false)
-            return MessageAdapter.ViewHolder(view)
+            return ViewHolder(view)
         }
     }
 
-    override fun onBindViewHolder(holder: MessageAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val chatJava = mChat[position]
 

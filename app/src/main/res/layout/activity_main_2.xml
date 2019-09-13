@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/drawerlayout"
-    tools:context=".activity.MainActivityJava">
+    tools:context=".ui.activity.MainActivityJava">
 
     <LinearLayout
         android:layout_width="match_parent"

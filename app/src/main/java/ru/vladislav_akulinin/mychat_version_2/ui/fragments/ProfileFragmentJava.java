@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.fragments;
+package ru.vladislav_akulinin.mychat_version_2.ui.fragments;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;

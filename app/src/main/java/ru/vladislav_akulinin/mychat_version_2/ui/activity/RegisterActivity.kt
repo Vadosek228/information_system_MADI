@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_register_new.*
+import kotlinx.android.synthetic.main.activity_register.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import java.util.HashMap
 
@@ -24,7 +24,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register_new)
+        setContentView(R.layout.activity_register)
         setToolbar()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

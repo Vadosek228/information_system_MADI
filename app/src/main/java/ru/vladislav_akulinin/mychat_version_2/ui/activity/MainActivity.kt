@@ -19,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.nav_header_main.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
-import ru.vladislav_akulinin.mychat_version_2.chat.ChatsFragment
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ChatsFragment
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.*
 
 
@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             .child("UserNew")
             .child(firebaseUser!!.uid)
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_2)
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             window.statusBarColor = resources.getColor(R.color.colorAccent, this.theme)
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.statusBarColor = resources.getColor(R.color.colorAccent)
+            window.statusBarColor = resources.getColor(R.color.colorAccent, this.theme)
         }
 
         drawerLayout = findViewById(R.id.drawerlayout)
@@ -95,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val myProfile = dataSnapshot.getValue(UserModel::class.java)
-                tv_username_nav_header.text = myProfile?.firstName + " " + myProfile?.lastName
+                tv_username_nav_header?.text = myProfile?.firstName + " " + myProfile?.lastName
             }
         })
     }

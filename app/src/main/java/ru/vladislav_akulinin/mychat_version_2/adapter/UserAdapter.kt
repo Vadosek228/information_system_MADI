@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.chat.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 
 class UserAdapter(

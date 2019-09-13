@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.LoginActivity"></activity>
+
         <activity android:name=".ui.activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,24 +23,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activity.RegisterActivityJava"
-            android:parentActivityName=".ui.activity.StartActivity" />
+            android:name=".ui.activity.LoginActivity"
+            android:parentActivityName=".ui.activity.ResetPasswordActivity"/>
+
         <activity android:name=".ui.activity.RegisterActivity"
             android:parentActivityName=".ui.activity.RegisterActivity"/>
+
         <activity
-            android:name=".activity.MainActivityJava"
+            android:name=".ui.activity.MainActivityJava"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.LoginActivityJava"
-            android:parentActivityName=".ui.activity.StartActivity" />
-        <activity android:name=".activity.MessageActivity" />
-        <activity
-            android:name=".activity.ResetPasswordActivity"
-            android:parentActivityName=".activity.LoginActivityJava" />
+
+        <activity android:name=".ui.activity.MessageActivity" />
 
         <service
             android:name=".notifications.MyFirebaseIdService"
@@ -50,6 +49,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <service
             android:name=".notifications.MyFirebaseMessaging"
             android:enabled="true"
@@ -58,6 +58,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-import ru.vladislav_akulinin.mychat_version_2.activity.MessageActivity;
+import ru.vladislav_akulinin.mychat_version_2.ui.activity.MessageActivity;
 import ru.vladislav_akulinin.mychat_version_2.model.ChatJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
