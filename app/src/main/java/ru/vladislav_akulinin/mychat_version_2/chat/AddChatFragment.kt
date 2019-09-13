@@ -50,7 +50,6 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
 
         userAdapter = UserAdapter(context)
         userAdapter.registerOnItemCallBack(this)
-
         view.recycler_view.adapter = userAdapter
 
         getUsers()
@@ -105,15 +104,6 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
                 .replace(R.id.container, MessageFragment(intent))
                 .addToBackStack(null)
                 .commit()
-
-//        firebaseDatabase
-//                    .child("Chats")
-//                    .push()
-//                    .setValue(MessageModel(input.text.toString(),
-//                            FirebaseAuth.getInstance()
-//                                    .currentUser!!
-//                                    .displayName)
-//                    )
     }
 
     //для поиска пользователя

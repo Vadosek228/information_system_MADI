@@ -38,7 +38,7 @@ public class ChatsFragmentJava extends Fragment {
     DatabaseReference reference;
 
     private List<String> usersList; //оптимизируем код
-//    private List<Chatlist> usersList;
+//    private List<ChatlistJava> usersList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,13 +80,13 @@ public class ChatsFragmentJava extends Fragment {
             }
         });
 
-//        reference = FirebaseDatabase.getInstance().getReference("Chatlist").child(fuser.getUid());
+//        reference = FirebaseDatabase.getInstance().getReference("ChatlistJava").child(fuser.getUid());
 //        reference.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                usersList.clear();
 //                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    Chatlist chatlist = snapshot.getValue(Chatlist.class);
+//                    ChatlistJava chatlist = snapshot.getValue(ChatlistJava.class);
 //                    usersList.add(chatlist);
 //                }
 //
@@ -122,7 +122,7 @@ public class ChatsFragmentJava extends Fragment {
 //                mUserJavas.clear();
 //                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 //                    UserJava user = snapshot.getValue(UserJava.class);
-//                    for(Chatlist chatlist : usersList){
+//                    for(ChatlistJava chatlist : usersList){
 //                        if(user.getId().equals(chatlist.getId())){
 //                            mUserJavas.add(user);
 //                        }

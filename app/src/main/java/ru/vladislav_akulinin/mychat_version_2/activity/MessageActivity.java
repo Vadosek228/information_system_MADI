@@ -194,7 +194,7 @@ public class MessageActivity extends AppCompatActivity {
         intent = getIntent();
         final String userid = intent.getStringExtra("userid");
 
-        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("ChatlistJava")
                 .child(fuser.getUid())
                 .child(userid);
 

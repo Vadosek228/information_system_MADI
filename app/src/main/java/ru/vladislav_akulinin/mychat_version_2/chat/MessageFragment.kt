@@ -15,9 +15,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_message.view.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -32,6 +34,10 @@ class MessageFragment(intent: Intent) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view= inflater.inflate(R.layout.fragment_message, container, false)
+
+        val parentActivity : MainActivity = activity as MainActivity // parent reference
+        parentActivity.setToolbar()
+        parentActivity.toolbar.title = "Приватный чат"
 
         view.recycler_view_message.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(context)
@@ -101,9 +107,7 @@ class MessageFragment(intent: Intent) : Fragment() {
                 }
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-
-            }
+            override fun onCancelled(databaseError: DatabaseError) {}
         })
     }
 
