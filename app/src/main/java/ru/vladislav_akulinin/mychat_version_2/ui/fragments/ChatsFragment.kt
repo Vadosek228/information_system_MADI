@@ -17,8 +17,10 @@ import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.toolbar.*
 import ru.vladislav_akulinin.mychat_version_2.adapter.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.ChatListModel
+import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 
 class ChatsFragment : Fragment(), OnItemClickedListener {
@@ -36,6 +38,10 @@ class ChatsFragment : Fragment(), OnItemClickedListener {
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_chats, container, false)
+
+        val parentActivity : MainActivity = activity as MainActivity // parent reference
+        parentActivity.setToolbar()
+        parentActivity.toolbar.setTitle(R.string.menu_chats)
 
         val layoutManager = LinearLayoutManager(context)
         view.recycler_view_list_chat.layoutManager = layoutManager

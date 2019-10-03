@@ -17,7 +17,9 @@ import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_users.view.*
+import kotlinx.android.synthetic.main.toolbar.*
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 
 class UsersFragment : Fragment() {
@@ -40,6 +42,10 @@ class UsersFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_users, container, false)
+
+        val parentActivity : MainActivity = activity as MainActivity // parent reference
+        parentActivity.setToolbar()
+        parentActivity.toolbar.setTitle(R.string.menu_contacts)
 
         val layoutManager = LinearLayoutManager(context)
         view.recycler_view.layoutManager = layoutManager

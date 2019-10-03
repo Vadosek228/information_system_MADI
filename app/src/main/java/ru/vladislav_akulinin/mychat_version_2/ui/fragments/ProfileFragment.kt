@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_profile_new.view.*
+import kotlinx.android.synthetic.main.toolbar.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import ru.vladislav_akulinin.mychat_version_2.utils.Utils
 
 class ProfileFragment : Fragment() {
@@ -23,6 +25,10 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_profile_new, container, false)
+
+        val parentActivity : MainActivity = activity as MainActivity // parent reference
+        parentActivity.setToolbar()
+        parentActivity.toolbar.setTitle(R.string.menu_profile)
 
         uploadYourData(view)
 

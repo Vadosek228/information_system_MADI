@@ -26,6 +26,8 @@ class UserAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false)
         return UserViewHolder(itemView)
+
+//        return UserViewHolder(LayoutInflater.from(context).inflate(R.layout.user_item, parent, false))
     }
 
     override fun getItemCount(): Int = userModelList.size
