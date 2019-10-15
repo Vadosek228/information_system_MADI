@@ -17,9 +17,27 @@
         android:layout_height="wrap_content"
         android:tint="@android:color/white"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/add_123"
+        android:src="@drawable/ic_add_white"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:fabSize="mini" />
+
+    <TextView
+        android:id="@+id/counterTextView"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/clickButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_add_white"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="200dp"
         android:layout_marginBottom="20dp"
         app:fabSize="mini" />
 

@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.fragment_users.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.adapter.UserAdapter
-import ru.vladislav_akulinin.mychat_version_2.adapter.OnItemClickedListener
+import ru.vladislav_akulinin.mychat_version_2.adapter.user.UserAdapter
+import ru.vladislav_akulinin.mychat_version_2.adapter.user.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 

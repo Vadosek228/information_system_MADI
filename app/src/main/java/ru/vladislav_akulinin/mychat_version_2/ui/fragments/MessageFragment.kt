@@ -18,10 +18,11 @@ import kotlinx.android.synthetic.main.fragment_message.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.adapter.MessageAdapter
+import ru.vladislav_akulinin.mychat_version_2.adapter.message.MessageAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
+import ru.vladislav_akulinin.mychat_version_2.utils.Utils.hideKeyboard
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -34,6 +35,8 @@ class MessageFragment(intent: Intent) : Fragment() {
     private lateinit var messageModelList: MutableList<MessageModel>
     internal lateinit var messageAdapter: MessageAdapter
 
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view= inflater.inflate(R.layout.fragment_message, container, false)
 
@@ -42,7 +45,7 @@ class MessageFragment(intent: Intent) : Fragment() {
         parentActivity.toolbar.title = "Приватный чат"
 
         view.recycler_view_message.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.stackFromEnd = true
         view.recycler_view_message.layoutManager = linearLayoutManager
 
@@ -111,6 +114,8 @@ class MessageFragment(intent: Intent) : Fragment() {
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+
+        hideKeyboard()
     }
 
     private fun readMessage(myid: String?, userid: String?, imageurl: String?, view: View) {
@@ -129,6 +134,7 @@ class MessageFragment(intent: Intent) : Fragment() {
                     messageAdapter = MessageAdapter()
                     messageAdapter.MessageAdapter(context, messageModelList, imageurl)
                     view.recycler_view_message.adapter = messageAdapter
+                    view.recycler_view_message.scrollToPosition(messageModelList.size - 1)
                 }
             }
 

@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.adapter
+package ru.vladislav_akulinin.mychat_version_2.adapter.user
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -24,10 +24,7 @@ class UserAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.user_item, parent, false)
-        return UserViewHolder(itemView)
-
-//        return UserViewHolder(LayoutInflater.from(context).inflate(R.layout.user_item, parent, false))
+        return UserViewHolder(LayoutInflater.from(context).inflate(R.layout.user_item, parent, false))
     }
 
     override fun getItemCount(): Int = userModelList.size

@@ -26,8 +26,10 @@
     <color name="color_view_background">#B6B6B8</color>
     <color name="color_background_circleImageView">#878787</color>
 
+    <color name="color_message_state">#BEAC32EE</color>
+
 
     //background EditText
-    <color name="color_background_edit_text">#BEC8AEDA</color>
+    <color name="color_background_edit_text">#401179</color>
 
 </resources>

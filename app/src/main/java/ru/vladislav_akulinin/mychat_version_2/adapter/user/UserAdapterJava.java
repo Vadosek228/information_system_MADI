@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.adapter;
+package ru.vladislav_akulinin.mychat_version_2.adapter.user;
 
 import android.content.Context;
 import android.content.Intent;

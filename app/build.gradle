@@ -59,9 +59,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.2.0'
     implementation 'com.firebaseui:firebase-ui-database:5.1.0'
 
-    //lifecycle - для отказа от цизненного цикла и сохранения состояния
+    //lifecycle - для отказа от жизненного цикла и сохранения состояния
     implementation 'com.google.android.material:material:1.0.0'
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
+
+    //RxJava, Kotlin and Android
+    implementation "io.reactivex.rxjava3:rxjava:3.0.0-RC2"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.13"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -1,5 +1,11 @@
 package ru.vladislav_akulinin.mychat_version_2.utils
 
+import android.content.Context
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+
 
 val symbolMap = mapOf("а" to "a", "б" to "b", "в" to "v", "г" to "g", "д" to "d", "е" to "e", "ё" to "e", "ж" to "zh",
         "з" to "z", "и" to "i", "й" to "i", "к" to "k", "л" to "l", "м" to "m", "н" to "n", "о" to "o", "п" to "p",
@@ -58,4 +64,20 @@ object Utils {
 //        benderImage?.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
 //        textTxt?.text = phrase
 //    }
+
+    fun AppCompatActivity.hideKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
+    fun Fragment.hideKeyboard() {
+        val activity = this.activity
+        if (activity is AppCompatActivity) {
+            activity.hideKeyboard()
+        }
+    }
 }
