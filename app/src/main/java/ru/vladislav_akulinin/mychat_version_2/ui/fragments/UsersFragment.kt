@@ -12,26 +12,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.adapter.user.UserAdapter
+import ru.vladislav_akulinin.mychat_version_2.adapter.user.UsersListAdapter
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_users.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserInterface
+import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserPresenter
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 
-class UsersFragment : Fragment() {
-
+class UsersFragment : Fragment(), UserInterface.View {
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
-    private lateinit var userAdapter: UserAdapter
+    private lateinit var usersListAdapter: UsersListAdapter
     private var userList = ArrayList<UserModel>()
 
     var total_item = 0
     var last_visibe_item = 0
     var isLoading = false
+
+    private lateinit var userListNew: MutableList<UserModel>
+    private var presenterChat: UserPresenter ?= null
 
     companion object {
         const val USER_PATH_KEY = "UserNew"
@@ -53,10 +57,15 @@ class UsersFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(view.recycler_view.context, layoutManager.orientation)
         view.recycler_view.addItemDecoration(dividerItemDecoration)
 
-        userAdapter = UserAdapter(context)
-        view.recycler_view.adapter = userAdapter
+        usersListAdapter = UsersListAdapter(context)
+        view.recycler_view.adapter = usersListAdapter
 
-        getUsers()
+        presenterChat = UserPresenter(this)
+        presenterChat?.let {
+            it.getUserList(it)
+        }
+
+//        getUsers()
 
         view.recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -90,6 +99,14 @@ class UsersFragment : Fragment() {
         return view
     }
 
+    override fun initViewChat() {
+        presenterChat?.getUserList(presenterChat!!)
+    }
+
+    override fun updateUserList(loadUserList: MutableList<UserModel>) {
+        usersListAdapter.addAll(loadUserList)
+    }
+
     //для поиска пользователя
     private fun searchUser(search: String, view: View) {
         val query: Query = FirebaseDatabase.getInstance().reference
@@ -114,9 +131,9 @@ class UsersFragment : Fragment() {
                     }
                 }
 
-                userAdapter = UserAdapter(context)
-                view.recycler_view.adapter = userAdapter
-                userAdapter.addAll(userList)
+                usersListAdapter = UsersListAdapter(context)
+                view.recycler_view.adapter = usersListAdapter
+                usersListAdapter.addAll(userList)
                 isLoading = false
             }
         })
@@ -142,7 +159,7 @@ class UsersFragment : Fragment() {
                             userList.add(user)
                         }
                     }
-                    userAdapter.addAll(userList)
+                    usersListAdapter.addAll(userList)
                     false
                 } else {
                     false
@@ -153,8 +170,8 @@ class UsersFragment : Fragment() {
 
     //обновление данных
     private fun refreshData() {
-        userAdapter.removeLastItem()
-        userAdapter.notifyDataSetChanged()
+        usersListAdapter.removeLastItem()
+        usersListAdapter.notifyDataSetChanged()
         getUsers()
     }
 

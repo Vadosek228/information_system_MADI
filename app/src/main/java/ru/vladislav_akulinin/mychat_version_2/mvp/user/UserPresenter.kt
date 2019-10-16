@@ -1,10 +1,10 @@
-package ru.vladislav_akulinin.mychat_version_2.mvp.chat
+package ru.vladislav_akulinin.mychat_version_2.mvp.user
 
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 
-class ChatPresenter(_view: ChatInterface.View): ChatInterface.Presenter {
-    private var view: ChatInterface.View = _view
-    private var model: ChatInterface.Model = ChatModel()
+class UserPresenter(_view: UserInterface.View): UserInterface.Presenter {
+    private var view: UserInterface.View = _view
+    private var model: UserInterface.Model = ru.vladislav_akulinin.mychat_version_2.mvp.user.UserModel()
 
     private var userList: MutableList<UserModel> ?= null
 
@@ -12,7 +12,7 @@ class ChatPresenter(_view: ChatInterface.View): ChatInterface.Presenter {
         view.initViewChat()
     }
 
-    override fun getUserList(presenter: ChatPresenter) {
+    override fun getUserList(presenter: UserPresenter) {
         model.getUserList(this) //передали интерфейс презентора
     }
 

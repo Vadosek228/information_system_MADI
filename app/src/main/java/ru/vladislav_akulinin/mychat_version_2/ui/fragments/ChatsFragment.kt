@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -18,25 +17,21 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_chats.view.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.android.synthetic.main.fragment_chats.view.counterTextView
 import kotlinx.android.synthetic.main.toolbar.*
-import ru.vladislav_akulinin.mychat_version_2.adapter.chat.ChatListAdapter
 import ru.vladislav_akulinin.mychat_version_2.adapter.chat.OnItemClickedListener
-import ru.vladislav_akulinin.mychat_version_2.adapter.user.UserAdapter
+import ru.vladislav_akulinin.mychat_version_2.adapter.user.UsersListAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.ChatListModel
 import ru.vladislav_akulinin.mychat_version_2.model.ChatModel
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatInterface
 import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatPresenter
-import ru.vladislav_akulinin.mychat_version_2.test.ContractInterface
 import ru.vladislav_akulinin.mychat_version_2.test.MainActivityPresenter
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 
-class ChatsFragment : Fragment(), OnItemClickedListener, ContractInterface.View, ChatInterface.View {
+class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
 //    private lateinit var chatAdapter: ChatListAdapter
-    private lateinit var chatAdapter: UserAdapter
+    private lateinit var chatAdapter: UsersListAdapter
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private lateinit var mUser: MutableList<ChatModel>
     private lateinit var chatsListModel: ArrayList<ChatListModel>
@@ -47,9 +42,6 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ContractInterface.View,
     var isLoading = false
 
 //    private lateinit var chatViewModel: ChatViewModel
-    private var presenter: MainActivityPresenter? = null
-    private lateinit var counterTextView: TextView
-    private lateinit var clickButton: FloatingActionButton
 
     private lateinit var userList: MutableList<UserModel>
     private var presenterChat: ChatPresenter ?= null
@@ -71,26 +63,17 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ContractInterface.View,
 
         chatsListModel = ArrayList()
 
-        counterTextView = view.findViewById(R.id.counterTextView)
-        clickButton = view.findViewById(R.id.clickButton)
-
         userList = ArrayList()
 
-
-        presenter = MainActivityPresenter(this)
-
-
 //        chatAdapter = ChatListAdapter(context)
-        chatAdapter = UserAdapter(context)
+        chatAdapter = UsersListAdapter(context)
 //        userAdapter.registerOnItemCallBack(this)
         view.recycler_view_list_chat.adapter = chatAdapter
 
         presenterChat = ChatPresenter(this)
         presenterChat?.let {
-            it.setUserList(it)
+            it.getUserList(it)
         }
-
-
 
 
         chatList(view)
@@ -113,22 +96,18 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ContractInterface.View,
     }
 
 
-    override fun initView() {
-        counterTextView.text = presenter?.getCounter()
-        clickButton.setOnClickListener { presenter?.incrementValue() }
-    }
-
-    override fun updateViewData() {
-        counterTextView.text = presenter?.getCounter()
-    }
-
-
-
+//    override fun initView() {
+//        counterTextView.text = presenter?.getCounter()
+//        clickButton.setOnClickListener { presenter?.incrementValue() }
+//    }
+//
+//    override fun updateViewData() {
+//        counterTextView.text = presenter?.getCounter()
+//    }
 
 
     override fun initViewChat(){
-        presenterChat?.setUserList(presenterChat!!)
-        presenterChat?.getUserList()?.let { chatAdapter.addAll(it) }
+        presenterChat?.getUserList(presenterChat!!)
     }
 
     override fun updateUserList(loadUserList: MutableList<UserModel>) {
@@ -192,8 +171,6 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ContractInterface.View,
 //            override fun onCancelled(databaseError: DatabaseError) {}
 //        })
 //    }
-
-
 
     @SuppressLint("PrivateResource")
     private fun openChat(chatModel: ChatModel){

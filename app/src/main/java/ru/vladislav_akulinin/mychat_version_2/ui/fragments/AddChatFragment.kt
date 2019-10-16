@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_users.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.adapter.user.UserAdapter
+import ru.vladislav_akulinin.mychat_version_2.adapter.user.UsersListAdapter
 import ru.vladislav_akulinin.mychat_version_2.adapter.user.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
@@ -27,7 +27,7 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
 
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
-    private lateinit var userAdapter: UserAdapter
+    private lateinit var usersListAdapter: UsersListAdapter
     private var userList = ArrayList<UserModel>()
 
     var total_item = 0
@@ -48,9 +48,9 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
         val dividerItemDecoration = DividerItemDecoration(view.recycler_view.context, layoutManager.orientation)
         view.recycler_view.addItemDecoration(dividerItemDecoration)
 
-        userAdapter = UserAdapter(context)
-        userAdapter.registerOnItemCallBack(this)
-        view.recycler_view.adapter = userAdapter
+        usersListAdapter = UsersListAdapter(context)
+        usersListAdapter.registerOnItemCallBack(this)
+        view.recycler_view.adapter = usersListAdapter
 
         getUsers()
 
@@ -130,9 +130,9 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
                     }
                 }
 
-                userAdapter = UserAdapter(context)
-                view.recycler_view.adapter = userAdapter
-                userAdapter.addAll(userList)
+                usersListAdapter = UsersListAdapter(context)
+                view.recycler_view.adapter = usersListAdapter
+                usersListAdapter.addAll(userList)
                 isLoading = false
             }
         })
@@ -158,7 +158,7 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
                             userList.add(user)
                         }
                     }
-                    userAdapter.addAll(userList)
+                    usersListAdapter.addAll(userList)
                     false
                 } else {
                     false

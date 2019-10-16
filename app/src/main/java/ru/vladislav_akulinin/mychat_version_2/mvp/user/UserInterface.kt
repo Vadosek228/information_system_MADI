@@ -1,8 +1,8 @@
-package ru.vladislav_akulinin.mychat_version_2.mvp.chat
+package ru.vladislav_akulinin.mychat_version_2.mvp.user
 
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 
-interface ChatInterface {
+interface UserInterface {
 
     interface View {
         fun initViewChat()
@@ -10,11 +10,11 @@ interface ChatInterface {
     }
 
     interface Presenter {
-        fun getUserList(presenter: ChatPresenter)
+        fun getUserList(presenter: UserPresenter)
         fun loadUserListData(userList: MutableList<UserModel>)
     }
 
     interface Model {
-        fun getUserList(presenter: ChatPresenter): MutableList<UserModel>
+        fun getUserList(presenter: UserPresenter): MutableList<UserModel>
     }
 }

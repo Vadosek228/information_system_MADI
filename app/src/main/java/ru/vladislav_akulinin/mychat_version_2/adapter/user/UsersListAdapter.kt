@@ -12,9 +12,9 @@ import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 
-class UserAdapter(
+class UsersListAdapter(
         internal var context: Context?
-) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+) : RecyclerView.Adapter<UsersListAdapter.UserViewHolder>() {
 
     private var clickListener: OnItemClickedListener? = null
     private var userModelList: MutableList<UserModel> = ArrayList()
