@@ -31,24 +31,15 @@ import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
     private lateinit var chatAdapter: ChatListAdapter
-//    private lateinit var chatAdapter: UsersListAdapter
-    private val firebaseUser = FirebaseAuth.getInstance().currentUser
-    private lateinit var mUser: MutableList<Chat>
     private lateinit var chatsListModel: ArrayList<ChatListModel>
-    private lateinit var chatList: MutableList<Chat>
+    private var presenterChat: ChatPresenter ?= null
 
     var total_item = 0
     var last_visibe_item = 0
     var isLoading = false
 
-//    private lateinit var chatViewModel: ChatViewModel
-
-    private lateinit var userList: MutableList<UserModel>
-    private var presenterChat: ChatPresenter ?= null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
         val view = inflater.inflate(R.layout.fragment_chats, container, false)
 
         val parentActivity : MainActivity = activity as MainActivity // parent reference
@@ -58,16 +49,10 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
         val layoutManager = LinearLayoutManager(context)
         view.recycler_view_list_chat.layoutManager = layoutManager
 
-        val dividerItemDecoration = DividerItemDecoration(view.recycler_view_list_chat.context, layoutManager.orientation)
-        view.recycler_view_list_chat.addItemDecoration(dividerItemDecoration)
-
         chatsListModel = ArrayList()
 
-        userList = ArrayList()
-
         chatAdapter = ChatListAdapter(context)
-//        chatAdapter = UsersListAdapter(context)
-//        userAdapter.registerOnItemCallBack(this)
+        chatAdapter.registerOnItemCallBack(this)
         view.recycler_view_list_chat.adapter = chatAdapter
 
         presenterChat = ChatPresenter(this)
@@ -84,7 +69,6 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
                 last_visibe_item = layoutManager.findLastVisibleItemPosition()
 
                 if (!isLoading && total_item <= last_visibe_item) {
-//                    chatList(view)
                     isLoading = true
                 }
             }

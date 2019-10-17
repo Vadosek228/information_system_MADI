@@ -48,7 +48,6 @@ class ChatModel : ChatInterface.Model {
                         }
                     }
                 }
-//                presenter.loadChatListData(userList)
                 getMessageList(userList, presenter)
             }
 
@@ -67,23 +66,23 @@ class ChatModel : ChatInterface.Model {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 messageModelList.clear()
                 for (userid in userList) {
+                    var messageModel_2: MessageModel ?= null
                     for (snapshot in dataSnapshot.children) {
                         val messageModel = snapshot.getValue(MessageModel::class.java)
                         if (messageModel!!.receiver == mUser?.uid && messageModel.sender == userid.id || messageModel.receiver == userid.id && messageModel.sender == mUser?.uid) {
                             messageModelList.add(messageModel)
-                            chatList.add(Chat(
-                                    userList[0].id,
-                                    messageModel.sender,
-                                    messageModel.receiver,
-                                    userList[0].firstName + " " + userList[0].lastName + " " + userList[0].fatherName,
-                                    "",
-                                    messageModel.message,
-                                    messageModel.isseen
-                            ))
-                            break
+                            messageModel_2 = messageModel
                         }
-                        break
                     }
+                    chatList.add(Chat(
+                            userid.id,
+                            messageModel_2?.sender,
+                            messageModel_2?.receiver,
+                            userid.firstName + " " + userid.lastName + " " + userid.fatherName,
+                            "",
+                            messageModel_2?.message,
+                            messageModel_2?.isseen
+                    ))
                 }
 
                 presenter.loadChatListData(chatList)

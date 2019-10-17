@@ -18,6 +18,10 @@ class ChatListAdapter(
     private var clickListener: OnItemClickedListener? = null
     private var chatModelList: MutableList<Chat> = ArrayList()
 
+    fun registerOnItemCallBack(clickListener: OnItemClickedListener) {
+        this.clickListener = clickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_item, parent, false))
     }
