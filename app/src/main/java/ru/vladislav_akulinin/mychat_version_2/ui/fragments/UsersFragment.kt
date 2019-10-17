@@ -22,6 +22,7 @@ import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserInterface
 import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserPresenter
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
+import ru.vladislav_akulinin.mychat_version_2.utils.Utils.hideKeyboard
 
 
 class UsersFragment : Fragment(), UserInterface.View {
@@ -92,6 +93,11 @@ class UsersFragment : Fragment(), UserInterface.View {
 
             }
         })
+
+        //hide focus and keyboard
+        view.isFocusableInTouchMode = true
+        view.requestFocus()
+        hideKeyboard()
 
         return view
     }

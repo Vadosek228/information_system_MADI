@@ -61,6 +61,8 @@ class MessageFragment(intent: Intent) : Fragment() {
             val msg = view.text_send.text.toString()
             if (msg != "") {
                 sendMessage(firebaseUser!!.uid, userId, msg)
+                view.isFocusableInTouchMode = true
+                view.requestFocus()
             } else {
                 Toast.makeText(context, "Введите сообщение, чтобы отправить...", Toast.LENGTH_SHORT).show()
             }
