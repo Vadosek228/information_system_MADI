@@ -18,10 +18,11 @@ import kotlinx.android.synthetic.main.fragment_chats.view.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.toolbar.*
+import ru.vladislav_akulinin.mychat_version_2.adapter.chat.ChatListAdapter
 import ru.vladislav_akulinin.mychat_version_2.adapter.chat.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.adapter.user.UsersListAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.ChatListModel
-import ru.vladislav_akulinin.mychat_version_2.model.ChatModel
+import ru.vladislav_akulinin.mychat_version_2.model.Chat
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatInterface
 import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatPresenter
@@ -29,12 +30,12 @@ import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 
 class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
-//    private lateinit var chatAdapter: ChatListAdapter
-    private lateinit var chatAdapter: UsersListAdapter
+    private lateinit var chatAdapter: ChatListAdapter
+//    private lateinit var chatAdapter: UsersListAdapter
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
-    private lateinit var mUser: MutableList<ChatModel>
+    private lateinit var mUser: MutableList<Chat>
     private lateinit var chatsListModel: ArrayList<ChatListModel>
-    private lateinit var chatList: MutableList<ChatModel>
+    private lateinit var chatList: MutableList<Chat>
 
     var total_item = 0
     var last_visibe_item = 0
@@ -64,8 +65,8 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
 
         userList = ArrayList()
 
-//        chatAdapter = ChatListAdapter(context)
-        chatAdapter = UsersListAdapter(context)
+        chatAdapter = ChatListAdapter(context)
+//        chatAdapter = UsersListAdapter(context)
 //        userAdapter.registerOnItemCallBack(this)
         view.recycler_view_list_chat.adapter = chatAdapter
 
@@ -96,7 +97,7 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
         presenterChat?.getChatList(presenterChat!!)
     }
 
-    override fun getChatList(loadChatList: MutableList<UserModel>) {
+    override fun getChatList(loadChatList: MutableList<Chat>) {
         chatAdapter.addAll(loadChatList)
     }
 
@@ -114,7 +115,7 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
     }
 
     @SuppressLint("PrivateResource")
-    private fun openChat(chatModel: ChatModel){
+    private fun openChat(chatModel: Chat){
         val intent = Intent().putExtra("userid", chatModel.id)
         fragmentManager!!
                 .beginTransaction()
@@ -124,11 +125,11 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
                 .commit()
     }
 
-    override fun onClicked(chatModel: ChatModel) {
+    override fun onClicked(chatModel: Chat) {
         openChat(chatModel)
     }
 
-    override fun onLongClicked(chatModel: ChatModel): Boolean {
+    override fun onLongClicked(chatModel: Chat): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -1,10 +1,10 @@
 package ru.vladislav_akulinin.mychat_version_2.adapter.chat
 
-import ru.vladislav_akulinin.mychat_version_2.model.ChatModel
+import ru.vladislav_akulinin.mychat_version_2.model.Chat
 
 interface OnItemClickedListener {
 
-    fun onClicked(userModel: ChatModel)
+    fun onClicked(userModel: Chat)
 
-    fun onLongClicked(userModel: ChatModel): Boolean
+    fun onLongClicked(userModel: Chat): Boolean
 }

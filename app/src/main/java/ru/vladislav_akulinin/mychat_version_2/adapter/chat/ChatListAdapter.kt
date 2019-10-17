@@ -9,14 +9,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.model.ChatModel
+import ru.vladislav_akulinin.mychat_version_2.model.Chat
 
 class ChatListAdapter(
         internal var context: Context?
 ) : RecyclerView.Adapter<ChatListAdapter.ChatViewHolder>() {
 
     private var clickListener: OnItemClickedListener? = null
-    private var chatModelList: MutableList<ChatModel> = ArrayList()
+    private var chatModelList: MutableList<Chat> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
         return ChatViewHolder(LayoutInflater.from(context).inflate(R.layout.chat_item, parent, false))
@@ -28,7 +28,7 @@ class ChatListAdapter(
         holder.userName.text = chatModelList[position].userName
         holder.statusUser.text = chatModelList[position].userMessage
 
-        if (chatModelList[position].userStatus == "offline") holder.statusOff.visibility = View.VISIBLE
+        if (chatModelList[position].userStatus == false) holder.statusOff.visibility = View.VISIBLE
         else holder.statusOn.visibility = View.VISIBLE
 
         (holder).bind(chatModelList[position], clickListener)
@@ -42,14 +42,14 @@ class ChatListAdapter(
         var statusOn: CircleImageView = itemView.findViewById(R.id.img_on)
         var statusOff: CircleImageView = itemView.findViewById(R.id.img_off)
 
-        fun bind(chatModel: ChatModel, clickListener: OnItemClickedListener?) {
+        fun bind(chatModel: Chat, clickListener: OnItemClickedListener?) {
             itemView.setOnClickListener {
                 clickListener?.onClicked(chatModel)
             }
         }
     }
 
-    fun addAll(newUserModel: MutableList<ChatModel>) {
+    fun addAll(newUserModel: MutableList<Chat>) {
         val init = chatModelList.size
         chatModelList.addAll(newUserModel)
         notifyItemRangeChanged(init, newUserModel.size)
