@@ -12,12 +12,12 @@ class ChatPresenter(_view: ChatInterface.View): ChatInterface.Presenter {
         view.initViewChat()
     }
 
-    override fun getUserList(presenter: ChatPresenter) {
-        model.getUserList(this) //передали интерфейс презентора
+    override fun getChatList(presenter: ChatPresenter) {
+        model.getChatList(this)
     }
 
-    override fun loadUserListData(loadUserList: MutableList<UserModel>){
-        userList = loadUserList
-        view.updateUserList(userList!!)
+    override fun loadChatListData(loadChatList: MutableList<UserModel>){
+        userList = loadChatList
+        view.getChatList(userList!!)
     }
 }

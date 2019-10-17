@@ -6,15 +6,15 @@ interface ChatInterface {
 
     interface View {
         fun initViewChat()
-        fun updateUserList(userList: MutableList<UserModel>)
+        fun getChatList(userList: MutableList<UserModel>)
     }
 
     interface Presenter {
-        fun getUserList(presenter: ChatPresenter)
-        fun loadUserListData(userList: MutableList<UserModel>)
+        fun getChatList(presenter: ChatPresenter)
+        fun loadChatListData(userList: MutableList<UserModel>)
     }
 
     interface Model {
-        fun getUserList(presenter: ChatPresenter): MutableList<UserModel>
+        fun getChatList(presenter: ChatPresenter)
     }
 }

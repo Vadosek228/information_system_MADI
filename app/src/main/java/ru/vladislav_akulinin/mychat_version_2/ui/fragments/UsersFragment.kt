@@ -34,7 +34,6 @@ class UsersFragment : Fragment(), UserInterface.View {
     var last_visibe_item = 0
     var isLoading = false
 
-    private lateinit var userListNew: MutableList<UserModel>
     private var presenterChat: UserPresenter ?= null
 
     companion object {
@@ -64,8 +63,6 @@ class UsersFragment : Fragment(), UserInterface.View {
         presenterChat?.let {
             it.getUserList(it)
         }
-
-//        getUsers()
 
         view.recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

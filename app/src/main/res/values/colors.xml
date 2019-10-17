@@ -28,8 +28,7 @@
 
     <color name="color_message_state">#BEAC32EE</color>
 
-
     //background EditText
-    <color name="color_background_edit_text">#401179</color>
+    <color name="color_background_edit_text">#CAC4F7</color>
 
 </resources>

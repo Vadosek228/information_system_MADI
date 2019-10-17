@@ -25,7 +25,6 @@ import ru.vladislav_akulinin.mychat_version_2.model.ChatModel
 import ru.vladislav_akulinin.mychat_version_2.model.UserModel
 import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatInterface
 import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatPresenter
-import ru.vladislav_akulinin.mychat_version_2.test.MainActivityPresenter
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 
@@ -72,11 +71,9 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
 
         presenterChat = ChatPresenter(this)
         presenterChat?.let {
-            it.getUserList(it)
+            it.getChatList(it)
         }
 
-
-        chatList(view)
         createNewChat(view)
 
         view.recycler_view_list_chat.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -86,7 +83,7 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
                 last_visibe_item = layoutManager.findLastVisibleItemPosition()
 
                 if (!isLoading && total_item <= last_visibe_item) {
-                    chatList(view)
+//                    chatList(view)
                     isLoading = true
                 }
             }
@@ -95,23 +92,12 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
         return view
     }
 
-
-//    override fun initView() {
-//        counterTextView.text = presenter?.getCounter()
-//        clickButton.setOnClickListener { presenter?.incrementValue() }
-//    }
-//
-//    override fun updateViewData() {
-//        counterTextView.text = presenter?.getCounter()
-//    }
-
-
     override fun initViewChat(){
-        presenterChat?.getUserList(presenterChat!!)
+        presenterChat?.getChatList(presenterChat!!)
     }
 
-    override fun updateUserList(loadUserList: MutableList<UserModel>) {
-        chatAdapter.addAll(loadUserList)
+    override fun getChatList(loadChatList: MutableList<UserModel>) {
+        chatAdapter.addAll(loadChatList)
     }
 
     @SuppressLint("PrivateResource")
@@ -126,51 +112,6 @@ class ChatsFragment : Fragment(), OnItemClickedListener, ChatInterface.View {
                     .commit()
         }
     }
-
-    private fun chatList(view: View){
-        val firebaseDatabaseChatList = FirebaseDatabase.getInstance().reference.child("Chatlist").child(firebaseUser!!.uid)
-        firebaseDatabaseChatList.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                chatsListModel.clear()
-                for(snapshot in dataSnapshot.children){
-                    val chatlist = snapshot.getValue(ChatListModel::class.java)
-                    chatlist?.let { chatsListModel.add(it) }
-                }
-//                userList()
-
-//                getUserList()
-//                updateUserList()
-//
-//                chatAdapter.addAll(userList)
-//                val user_2 = chatViewModel.getFirebaseUserList()
-//                        chatAdapter.addAll(chatViewModel.getFirebaseUserList())
-
-            }
-
-            override fun onCancelled(p0: DatabaseError) {}
-        })
-    }
-
-//    private fun userList() {
-//        mUser = ArrayList()
-//        val firebaseDatabaseUser = FirebaseDatabase.getInstance().reference.child("UserNew")
-//        firebaseDatabaseUser.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                mUser.clear()
-//                for (snapshot in dataSnapshot.children) {
-//                    val user = snapshot.getValue(ChatModel::class.java)
-//                    for (chatlist: ChatListModel in chatsListModel) {
-//                        if (user!!.id == chatlist.id) {
-//                            mUser.add(user)
-//                        }
-//                    }
-//                }
-//                chatAdapter.addAll(mUser)
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {}
-//        })
-//    }
 
     @SuppressLint("PrivateResource")
     private fun openChat(chatModel: ChatModel){
