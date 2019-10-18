@@ -1,10 +1,10 @@
 package ru.vladislav_akulinin.mychat_version_2.adapter.user
 
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 
 interface OnItemClickedListener {
 
-    fun onClicked(userModel: UserModel)
+    fun onClicked(user: User)
 
-    fun onLongClicked(userModel: UserModel): Boolean
+    fun onLongClicked(user: User): Boolean
 }

@@ -10,14 +10,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 
 class UsersListAdapter(
         internal var context: Context?
 ) : RecyclerView.Adapter<UsersListAdapter.UserViewHolder>() {
 
     private var clickListener: OnItemClickedListener? = null
-    private var userModelList: MutableList<UserModel> = ArrayList()
+    private var userList: MutableList<User> = ArrayList()
 
     fun registerOnItemCallBack(clickListener: OnItemClickedListener) {
         this.clickListener = clickListener
@@ -27,17 +27,17 @@ class UsersListAdapter(
         return UserViewHolder(LayoutInflater.from(context).inflate(R.layout.user_item, parent, false))
     }
 
-    override fun getItemCount(): Int = userModelList.size
+    override fun getItemCount(): Int = userList.size
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.userName.text = userModelList[position].firstName + " " + userModelList[position].lastName
-        holder.statusUser.text = userModelList[position].statusUser
+        holder.userName.text = userList[position].firstName + " " + userList[position].lastName
+        holder.statusUser.text = userList[position].statusUser
 
-        if (userModelList[position].status == "offline") holder.statusOff.visibility = View.VISIBLE
+        if (userList[position].status == "offline") holder.statusOff.visibility = View.VISIBLE
         else holder.statusOn.visibility = View.VISIBLE
 
-        (holder).bind(userModelList[position], clickListener)
+        (holder).bind(userList[position], clickListener)
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -48,20 +48,20 @@ class UsersListAdapter(
         var statusOn: CircleImageView = itemView.findViewById(R.id.img_on)
         var statusOff: CircleImageView = itemView.findViewById(R.id.img_off)
 
-        fun bind(userModel: UserModel, clickListener: OnItemClickedListener?) {
+        fun bind(user: User, clickListener: OnItemClickedListener?) {
             itemView.setOnClickListener {
-                clickListener?.onClicked(userModel)
+                clickListener?.onClicked(user)
             }
         }
     }
 
-    fun addAll(newUserModel: List<UserModel>) {
-        val init = userModelList.size
-        userModelList.addAll(newUserModel)
-        notifyItemRangeChanged(init, newUserModel.size)
+    fun addAll(newUser: List<User>) {
+        val init = userList.size
+        userList.addAll(newUser)
+        notifyItemRangeChanged(init, newUser.size)
     }
 
     fun removeLastItem() {
-        userModelList.removeAt(userModelList.size - 1)
+        userList.removeAt(userList.size - 1)
     }
 }

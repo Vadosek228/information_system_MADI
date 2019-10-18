@@ -7,12 +7,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ru.vladislav_akulinin.mychat_version_2.model.ChatListModel
 import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.model.Chat
 
 class ChatModel : ChatInterface.Model {
     private val mUser = FirebaseAuth.getInstance().currentUser
-    private lateinit var userList: MutableList<UserModel>
+    private lateinit var userList: MutableList<User>
     private lateinit var chatList: MutableList<Chat>
     private lateinit var chatsListModel: ArrayList<ChatListModel>
     private lateinit var messageModelList: MutableList<MessageModel>
@@ -41,7 +41,7 @@ class ChatModel : ChatInterface.Model {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 userList.clear()
                 for (snapshot in dataSnapshot.children) {
-                    val user = snapshot.getValue(UserModel::class.java)
+                    val user = snapshot.getValue(User::class.java)
                     for (chatlist: ChatListModel in chatsListModel) {
                         if (user!!.id == chatlist.id) {
                             userList.add(user)
@@ -57,7 +57,7 @@ class ChatModel : ChatInterface.Model {
         })
     }
 
-    private fun getMessageList(userList: MutableList<UserModel>, presenter: ChatPresenter) {
+    private fun getMessageList(userList: MutableList<User>, presenter: ChatPresenter) {
         messageModelList = ArrayList()
         chatList = ArrayList()
 

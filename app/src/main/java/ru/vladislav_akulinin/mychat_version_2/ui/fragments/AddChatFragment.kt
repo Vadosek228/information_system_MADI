@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.adapter.user.UsersListAdapter
 import ru.vladislav_akulinin.mychat_version_2.adapter.user.OnItemClickedListener
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 class AddChatFragment : Fragment(), OnItemClickedListener {
@@ -28,7 +28,7 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
     private lateinit var usersListAdapter: UsersListAdapter
-    private var userList = ArrayList<UserModel>()
+    private var userList = ArrayList<User>()
 
     var total_item = 0
     var last_visibe_item = 0
@@ -86,17 +86,17 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
         return view
     }
 
-    override fun onLongClicked(userModel: UserModel): Boolean {
+    override fun onLongClicked(user: User): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onClicked(userModel: UserModel) {
-        createNewChat(userModel)
+    override fun onClicked(user: User) {
+        createNewChat(user)
     }
 
     @SuppressLint("PrivateResource")
-    private fun createNewChat(userModel: UserModel){
-        val intent = Intent().putExtra("userid", userModel.id)
+    private fun createNewChat(user: User){
+        val intent = Intent().putExtra("userid", user.id)
 
         fragmentManager!!
                 .beginTransaction()
@@ -123,7 +123,7 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
                 userList.clear()
 
                 for (snapshot in p0.children) {
-                    val user = snapshot.getValue(UserModel::class.java)!!
+                    val user = snapshot.getValue(User::class.java)!!
 
                     if (user.id != firebaseUser?.uid) {
                         userList.add(user)
@@ -152,7 +152,7 @@ class AddChatFragment : Fragment(), OnItemClickedListener {
             override fun onDataChange(p0: DataSnapshot) {
                 isLoading = if(p0.hasChildren()) {
                     for (snapshot in p0.children) {
-                        val user = snapshot.getValue(UserModel::class.java)!!
+                        val user = snapshot.getValue(User::class.java)!!
 
                         if (user.id != firebaseUser?.uid) {
                             userList.add(user)

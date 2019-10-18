@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.adapter.message.MessageAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import ru.vladislav_akulinin.mychat_version_2.utils.Utils.hideKeyboard
 import java.util.ArrayList
@@ -73,7 +73,7 @@ class MessageFragment(intent: Intent) : Fragment() {
 
         firebaseReferenceUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val user = dataSnapshot.getValue(UserModel::class.java)
+                val user = dataSnapshot.getValue(User::class.java)
                 view.username.setText(user!!.firstName)
                 if (user.imageURL == "default") {
                     view.profile_image.setImageResource(R.mipmap.ic_launcher)

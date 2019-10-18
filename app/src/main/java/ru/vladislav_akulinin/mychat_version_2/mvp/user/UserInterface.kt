@@ -1,20 +1,20 @@
 package ru.vladislav_akulinin.mychat_version_2.mvp.user
 
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 
 interface UserInterface {
 
     interface View {
         fun initViewChat()
-        fun updateUserList(userList: MutableList<UserModel>)
+        fun updateUserList(userList: MutableList<User>)
     }
 
     interface Presenter {
         fun getUserList(presenter: UserPresenter)
-        fun loadUserListData(userList: MutableList<UserModel>)
+        fun loadUserListData(userList: MutableList<User>)
     }
 
     interface Model {
-        fun getUserList(presenter: UserPresenter): MutableList<UserModel>
+        fun getUserList(presenter: UserPresenter): MutableList<User>
     }
 }

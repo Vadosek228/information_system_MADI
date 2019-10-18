@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_users.view.*
 import kotlinx.android.synthetic.main.toolbar.*
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserInterface
 import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserPresenter
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
@@ -29,7 +29,7 @@ class UsersFragment : Fragment(), UserInterface.View {
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
     private lateinit var usersListAdapter: UsersListAdapter
-    private var userList = ArrayList<UserModel>()
+    private var userList = ArrayList<User>()
 
     var total_item = 0
     var last_visibe_item = 0
@@ -106,7 +106,7 @@ class UsersFragment : Fragment(), UserInterface.View {
         presenterChat?.getUserList(presenterChat!!)
     }
 
-    override fun updateUserList(loadUserList: MutableList<UserModel>) {
+    override fun updateUserList(loadUserList: MutableList<User>) {
         usersListAdapter.addAll(loadUserList)
     }
 
@@ -127,7 +127,7 @@ class UsersFragment : Fragment(), UserInterface.View {
                 userList.clear()
 
                 for (snapshot in p0.children) {
-                    val user = snapshot.getValue(UserModel::class.java)!!
+                    val user = snapshot.getValue(User::class.java)!!
 
                     if (user.id != firebaseUser?.uid) {
                         userList.add(user)
@@ -156,7 +156,7 @@ class UsersFragment : Fragment(), UserInterface.View {
             override fun onDataChange(p0: DataSnapshot) {
                 isLoading = if(p0.hasChildren()) {
                     for (snapshot in p0.children) {
-                        val user = snapshot.getValue(UserModel::class.java)!!
+                        val user = snapshot.getValue(User::class.java)!!
 
                         if (user.id != firebaseUser?.uid) {
                             userList.add(user)

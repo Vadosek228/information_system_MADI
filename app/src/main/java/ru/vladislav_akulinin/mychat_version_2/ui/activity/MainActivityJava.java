@@ -52,7 +52,7 @@ public class MainActivityJava extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser(); //получаем текущего пользователя, вошедшего в систему
         reference = FirebaseDatabase
                 .getInstance() //получить ссылку на местоположение
-                .getReference("UserModel") //где хранятся
+                .getReference("User") //где хранятся
                 .child(firebaseUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {

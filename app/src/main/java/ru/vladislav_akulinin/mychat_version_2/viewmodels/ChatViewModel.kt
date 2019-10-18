@@ -7,7 +7,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ru.vladislav_akulinin.mychat_version_2.model.ChatListModel
-import ru.vladislav_akulinin.mychat_version_2.model.UserModel
+import ru.vladislav_akulinin.mychat_version_2.model.User
 
 class ChatViewModel : ViewModel() {
 
@@ -17,7 +17,7 @@ class ChatViewModel : ViewModel() {
 
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private lateinit var chatsListModel: ArrayList<ChatListModel>
-    private lateinit var mUser: MutableList<UserModel>
+    private lateinit var mUser: MutableList<User>
 
     //получить список чатов пользователя
     fun getChatList(){
@@ -37,14 +37,14 @@ class ChatViewModel : ViewModel() {
     }
 
     //получить весь список пользователей
-    fun getFirebaseUserList() : MutableList<UserModel>{
+    fun getFirebaseUserList() : MutableList<User>{
         mUser = ArrayList()
         val firebaseDatabaseUser = FirebaseDatabase.getInstance().reference.child("UserNew")
         firebaseDatabaseUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 mUser.clear()
                 for (snapshot in dataSnapshot.children) {
-                    val user = snapshot.getValue(UserModel::class.java)
+                    val user = snapshot.getValue(User::class.java)
                     for (chatlist: ChatListModel in chatsListModel) {
                         if (user!!.id == chatlist.id) {
                             mUser.add(user)
