@@ -65,23 +65,24 @@ class ChatModel : ChatInterface.Model {
         firebaseReferenceChat.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 messageModelList.clear()
+                chatList.clear()
                 for (userid in userList) {
-                    var messageModel_2: MessageModel ?= null
+                    var messageModelInChatList: MessageModel ?= null
                     for (snapshot in dataSnapshot.children) {
                         val messageModel = snapshot.getValue(MessageModel::class.java)
                         if (messageModel!!.receiver == mUser?.uid && messageModel.sender == userid.id || messageModel.receiver == userid.id && messageModel.sender == mUser?.uid) {
                             messageModelList.add(messageModel)
-                            messageModel_2 = messageModel
+                            messageModelInChatList = messageModel
                         }
                     }
                     chatList.add(Chat(
                             userid.id,
-                            messageModel_2?.sender,
-                            messageModel_2?.receiver,
+                            messageModelInChatList?.sender,
+                            messageModelInChatList?.receiver,
                             userid.firstName + " " + userid.lastName + " " + userid.fatherName,
                             "",
-                            messageModel_2?.message,
-                            messageModel_2?.isseen
+                            messageModelInChatList?.message,
+                            messageModelInChatList?.isseen
                     ))
                 }
 

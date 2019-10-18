@@ -15,8 +15,8 @@ import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
 
 class MessageAdapter : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
-    val MSG_TYPE_LEFT = 0
-    val MSG_TYPE_RIGHT = 1
+    private val MSG_TYPE_LEFT = 0
+    private val MSG_TYPE_RIGHT = 1
 
     private var mContext: Context? = null
     private lateinit var mChat: MutableList<MessageModel>
@@ -42,19 +42,21 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val chatJava = mChat[position]
+        val messageModel = mChat[position]
 
-        holder.show_message.text = chatJava.message
+        holder.show_message.text = messageModel.message
+
+        if (!messageModel.author.isNullOrEmpty())
+            holder.userName.text = messageModel.author
 
         if (imageurl == "default") {
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher)
+            holder.profile_image.setImageResource(R.drawable.avatar_default)
         } else {
             mContext?.let { Glide.with(it).load(imageurl).into(holder.profile_image) }
         }
 
-        //для отображения статуса сообщения (прочитано или нет)
         if (position == mChat.size - 1) {
-            if (chatJava.isseen!!) {
+            if (messageModel.isseen!!) {
                 holder.txt_seen.text = "Прочитано"
             } else {
                 holder.txt_seen.text = "Не прочитано"
@@ -73,13 +75,14 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
 
         var show_message: TextView
         var profile_image: ImageView
-        var txt_seen: TextView //для отображения (прочитано или нет) сообщения пользователя
+        var txt_seen: TextView
+        var userName: TextView
 
         init {
-
             show_message = itemView.findViewById(R.id.show_message)
             profile_image = itemView.findViewById(R.id.profile_image)
             txt_seen = itemView.findViewById(R.id.txt_seen)
+            userName = itemView.findViewById(R.id.user_name)
         }
     }
 

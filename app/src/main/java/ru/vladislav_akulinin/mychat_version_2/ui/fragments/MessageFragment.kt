@@ -1,5 +1,6 @@
 package ru.vladislav_akulinin.mychat_version_2.ui.fragments
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,14 +24,17 @@ import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
 import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import ru.vladislav_akulinin.mychat_version_2.utils.Utils.hideKeyboard
-import java.util.ArrayList
-import java.util.HashMap
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MessageFragment(intent: Intent) : Fragment() {
 
     val intent = intent
     val firebaseUser = FirebaseAuth.getInstance().currentUser
     var firebaseReference = FirebaseDatabase.getInstance().reference
+
+    var user: User ?= null
+    private lateinit var otherUser: String
 
     private lateinit var messageModelList: MutableList<MessageModel>
     internal lateinit var messageAdapter: MessageAdapter
@@ -49,6 +53,10 @@ class MessageFragment(intent: Intent) : Fragment() {
         linearLayoutManager.stackFromEnd = true
         view.recycler_view_message.layoutManager = linearLayoutManager
 
+        val userId = intent.getStringExtra("userid")
+        otherUser = userId
+
+        getUserData()
         createMessage(view)
 
         return view
@@ -72,16 +80,17 @@ class MessageFragment(intent: Intent) : Fragment() {
         val firebaseReferenceUser = firebaseReference.child("UserNew").child(userId)
 
         firebaseReferenceUser.addValueEventListener(object : ValueEventListener {
+            @SuppressLint("SetTextI18n")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val user = dataSnapshot.getValue(User::class.java)
-                view.username.setText(user!!.firstName)
-                if (user.imageURL == "default") {
-                    view.profile_image.setImageResource(R.mipmap.ic_launcher)
+                view.username.text = "${user?.firstName} ${user?.lastName} - ${user?.statusUser}"
+                if (user?.imageURL == "default") {
+                    view.profile_image.setImageResource(R.drawable.avatar_default)
                 } else {
-                    context?.let { Glide.with(it).load(user.imageURL).into(view.profile_image) }
+                    context?.let { Glide.with(it).load(user?.imageURL).into(view.profile_image) }
                 }
 
-                readMessage(firebaseUser!!.uid, userId, user.imageURL, view)
+                readMessage(firebaseUser!!.uid, userId, user?.imageURL, view)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -89,15 +98,45 @@ class MessageFragment(intent: Intent) : Fragment() {
             }
         })
 
+
     }
 
+//    override fun onStart() {
+//        super.onStart()
+//        seenMessage(otherUser)
+//    }
+
+    private fun getUserData() {
+        val firebaseDatabaseUser = FirebaseDatabase.getInstance().reference.child("UserNew")
+        firebaseDatabaseUser.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    val userNew = snapshot.getValue(User::class.java)
+                    if (userNew != null && firebaseUser!!.uid == userNew.id) {
+                        user = userNew
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                throw databaseError.toException()
+            }
+        })
+    }
+
+    @SuppressLint("SimpleDateFormat")
     private fun sendMessage(sender: String, receiver: String, message: String){
+
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
 
         val hashMap = HashMap<String, Any>()
         hashMap["sender"] = sender
         hashMap["receiver"] = receiver
         hashMap["message"] = message
         hashMap["isseen"] = false
+        hashMap["author"] = user?.firstName + " " + user?.lastName + " " + user?.fatherName
+        hashMap["time"] = currentDate.toString()
 
         firebaseReference.child("Chats").push().setValue(hashMap)
 
@@ -143,6 +182,24 @@ class MessageFragment(intent: Intent) : Fragment() {
             override fun onCancelled(databaseError: DatabaseError) {
 
             }
+        })
+    }
+
+    private fun seenMessage(userid: String?) {
+        val reference = FirebaseDatabase.getInstance().getReference("Chats")
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    val messageModel = snapshot.getValue(MessageModel::class.java)
+                    if (messageModel!!.receiver == firebaseUser?.uid && messageModel.sender == userid) {
+                        val hashMap = HashMap<String, Any>()
+                        hashMap["isseen"] = true
+                        snapshot.ref.updateChildren(hashMap)
+                    }
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
         })
     }
 }

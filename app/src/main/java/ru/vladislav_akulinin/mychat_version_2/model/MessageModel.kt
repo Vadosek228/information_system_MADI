@@ -4,9 +4,9 @@ data class MessageModel(
         val sender: String? = null,
         val receiver: String? = null,
         val message: String? = null,
-        val isseen: Boolean? = null
-//        val author: String? = null,
-//        val time: String? = null
+        var isseen: Boolean? = null,
+        val author: String? = null,
+        val time: String? = null
 ) {
-    constructor() : this("", "", "", null)
+    constructor() : this("", "", "", true, "", "")
 }
