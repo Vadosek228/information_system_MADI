@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
                     toolbar.setTitle(R.string.menu_library)
                 }
                 R.id.nav_profile -> {
-                    val fragment = ProfileFragment()
+                    val fragment = ProfileFragment(firebaseUser?.uid.toString())
                     addFragment(fragment)
                     toolbar.setTitle(R.string.menu_profile)
                 }

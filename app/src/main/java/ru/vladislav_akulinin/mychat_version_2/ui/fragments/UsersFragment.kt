@@ -1,5 +1,7 @@
 package ru.vladislav_akulinin.mychat_version_2.ui.fragments
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_users.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import ru.vladislav_akulinin.mychat_version_2.adapter.user.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserInterface
 import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserPresenter
@@ -25,7 +28,7 @@ import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import ru.vladislav_akulinin.mychat_version_2.utils.Utils.hideKeyboard
 
 
-class UsersFragment : Fragment(), UserInterface.View {
+class UsersFragment : Fragment(), OnItemClickedListener, UserInterface.View {
     val firebaseUser = FirebaseAuth.getInstance().currentUser
 
     private lateinit var usersListAdapter: UsersListAdapter
@@ -58,6 +61,7 @@ class UsersFragment : Fragment(), UserInterface.View {
         view.recycler_view.addItemDecoration(dividerItemDecoration)
 
         usersListAdapter = UsersListAdapter(context)
+        usersListAdapter.registerOnItemCallBack(this)
         view.recycler_view.adapter = usersListAdapter
 
         presenterChat = UserPresenter(this)
@@ -73,7 +77,7 @@ class UsersFragment : Fragment(), UserInterface.View {
                 last_visibe_item = layoutManager.findLastVisibleItemPosition()
 
                 if (!isLoading && total_item <= last_visibe_item) {
-                    getUsers()
+//                    getUsers()
                     isLoading = true
                 }
             }
@@ -110,6 +114,25 @@ class UsersFragment : Fragment(), UserInterface.View {
         usersListAdapter.addAll(loadUserList)
     }
 
+    override fun onClicked(user: User) {
+        openProfile(user)
+    }
+
+    override fun onLongClicked(user: User): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    @SuppressLint("PrivateResource")
+    private fun openProfile(user: User?){
+        fragmentManager!!
+                .beginTransaction()
+                .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+                .replace(R.id.container, ProfileFragment(user?.id.toString()))
+                .addToBackStack(null)
+                .commit()
+    }
+
+
     //для поиска пользователя
     private fun searchUser(search: String, view: View) {
         val query: Query = FirebaseDatabase.getInstance().reference
@@ -143,39 +166,39 @@ class UsersFragment : Fragment(), UserInterface.View {
 
     }
 
-    private fun getUsers() {
-        val query: Query = FirebaseDatabase.getInstance().reference
-                .child(USER_PATH_KEY)
-                .orderByKey()
+//    private fun getUsers() {
+//        val query: Query = FirebaseDatabase.getInstance().reference
+//                .child(USER_PATH_KEY)
+//                .orderByKey()
+//
+//        query.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onCancelled(p0: DatabaseError) {
+//
+//            }
+//
+//            override fun onDataChange(p0: DataSnapshot) {
+//                isLoading = if(p0.hasChildren()) {
+//                    for (snapshot in p0.children) {
+//                        val user = snapshot.getValue(User::class.java)!!
+//
+//                        if (user.id != firebaseUser?.uid) {
+//                            userList.add(user)
+//                        }
+//                    }
+//                    usersListAdapter.addAll(userList)
+//                    false
+//                } else {
+//                    false
+//                }
+//            }
+//        })
+//    }
 
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                isLoading = if(p0.hasChildren()) {
-                    for (snapshot in p0.children) {
-                        val user = snapshot.getValue(User::class.java)!!
-
-                        if (user.id != firebaseUser?.uid) {
-                            userList.add(user)
-                        }
-                    }
-                    usersListAdapter.addAll(userList)
-                    false
-                } else {
-                    false
-                }
-            }
-        })
-    }
-
-    //обновление данных
-    private fun refreshData() {
-        usersListAdapter.removeLastItem()
-        usersListAdapter.notifyDataSetChanged()
-        getUsers()
-    }
+//    //обновление данных
+//    private fun refreshData() {
+//        usersListAdapter.removeLastItem()
+//        usersListAdapter.notifyDataSetChanged()
+//        getUsers()
+//    }
 
 }

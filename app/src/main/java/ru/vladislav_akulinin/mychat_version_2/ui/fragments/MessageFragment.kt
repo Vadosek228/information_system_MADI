@@ -27,9 +27,8 @@ import ru.vladislav_akulinin.mychat_version_2.utils.Utils.hideKeyboard
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MessageFragment(intent: Intent) : Fragment() {
+class MessageFragment(val intent: Intent) : Fragment() {
 
-    val intent = intent
     val firebaseUser = FirebaseAuth.getInstance().currentUser
     var firebaseReference = FirebaseDatabase.getInstance().reference
 

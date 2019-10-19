@@ -15,12 +15,12 @@ import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import ru.vladislav_akulinin.mychat_version_2.utils.Utils
 
-class ProfileFragment : Fragment() {
+class ProfileFragment(val userId: String) : Fragment() {
 
     private val firebaseUser = FirebaseAuth.getInstance().currentUser
     private val firebaseMyDatabase: Query = FirebaseDatabase.getInstance().reference
             .child("UserNew")
-            .child(firebaseUser!!.uid)
+            .child(userId)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,6 +36,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun uploadYourData(view:View){
+
         firebaseMyDatabase.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {}
 
