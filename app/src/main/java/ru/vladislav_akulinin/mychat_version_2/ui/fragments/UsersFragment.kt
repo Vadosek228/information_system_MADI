@@ -1,7 +1,6 @@
 package ru.vladislav_akulinin.mychat_version_2.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -132,8 +131,6 @@ class UsersFragment : Fragment(), OnItemClickedListener, UserInterface.View {
                 .commit()
     }
 
-
-    //для поиска пользователя
     private fun searchUser(search: String, view: View) {
         val query: Query = FirebaseDatabase.getInstance().reference
                 .child(USER_PATH_KEY)
