@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.mvp.chat
+package ru.vladislav_akulinin.mychat_version_2.ui.mvp.chat
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.adapter;
+package ru.vladislav_akulinin.mychat_version_2.ui.adapter;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;

@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import ru.vladislav_akulinin.mychat_version_2.adapter.ViewPagerAdapter;
+import ru.vladislav_akulinin.mychat_version_2.ui.adapter.ViewPagerAdapter;
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ProfileFragmentJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;

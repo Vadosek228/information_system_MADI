@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.adapter.message
+package ru.vladislav_akulinin.mychat_version_2.ui.adapter.message
 
 import android.content.Context
 import android.view.LayoutInflater

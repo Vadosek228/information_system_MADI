@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_message.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.adapter.message.MessageAdapter
+import ru.vladislav_akulinin.mychat_version_2.ui.adapter.message.MessageAdapter
 import ru.vladislav_akulinin.mychat_version_2.model.MessageModel
 import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity

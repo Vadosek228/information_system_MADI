@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_chats.view.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import kotlinx.android.synthetic.main.toolbar.*
-import ru.vladislav_akulinin.mychat_version_2.adapter.chat.ChatListAdapter
-import ru.vladislav_akulinin.mychat_version_2.adapter.chat.OnItemClickedListener
+import ru.vladislav_akulinin.mychat_version_2.ui.adapter.chat.ChatListAdapter
+import ru.vladislav_akulinin.mychat_version_2.ui.adapter.chat.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.ChatListModel
 import ru.vladislav_akulinin.mychat_version_2.model.Chat
-import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatInterface
-import ru.vladislav_akulinin.mychat_version_2.mvp.chat.ChatPresenter
+import ru.vladislav_akulinin.mychat_version_2.ui.mvp.chat.ChatInterface
+import ru.vladislav_akulinin.mychat_version_2.ui.mvp.chat.ChatPresenter
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 
 

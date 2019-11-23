@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.adapter.chat
+package ru.vladislav_akulinin.mychat_version_2.ui.adapter.chat
 
 import ru.vladislav_akulinin.mychat_version_2.model.Chat
 

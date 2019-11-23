@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.adapter.user
+package ru.vladislav_akulinin.mychat_version_2.ui.adapter.user
 
 import android.annotation.SuppressLint
 import android.content.Context

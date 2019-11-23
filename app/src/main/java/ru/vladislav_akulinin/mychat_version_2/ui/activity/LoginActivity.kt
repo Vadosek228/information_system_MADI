@@ -41,14 +41,9 @@ class LoginActivity : AppCompatActivity() {
         userEmail = findViewById(R.id.user_mail)
         userPass = findViewById(R.id.user_pass)
         btnLogin = findViewById(R.id.sign_in)
-        forgotPassword = findViewById(R.id.btn_registration)
 
         btnLogin.setOnClickListener {
             signIn()
-        }
-
-        btn_registration.setOnClickListener{
-            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
     }
 

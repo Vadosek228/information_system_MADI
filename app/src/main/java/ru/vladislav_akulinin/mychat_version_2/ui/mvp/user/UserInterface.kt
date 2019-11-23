@@ -1,4 +1,4 @@
-package ru.vladislav_akulinin.mychat_version_2.mvp.user
+package ru.vladislav_akulinin.mychat_version_2.ui.mvp.user
 
 import ru.vladislav_akulinin.mychat_version_2.model.User
 

@@ -13,16 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import ru.vladislav_akulinin.mychat_version_2.R
-import ru.vladislav_akulinin.mychat_version_2.adapter.user.UsersListAdapter
+import ru.vladislav_akulinin.mychat_version_2.ui.adapter.user.UsersListAdapter
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import kotlinx.android.synthetic.main.fragment_users.view.*
 import kotlinx.android.synthetic.main.toolbar.*
-import ru.vladislav_akulinin.mychat_version_2.adapter.user.OnItemClickedListener
+import ru.vladislav_akulinin.mychat_version_2.ui.adapter.user.OnItemClickedListener
 import ru.vladislav_akulinin.mychat_version_2.model.User
-import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserInterface
-import ru.vladislav_akulinin.mychat_version_2.mvp.user.UserPresenter
+import ru.vladislav_akulinin.mychat_version_2.ui.mvp.user.UserInterface
+import ru.vladislav_akulinin.mychat_version_2.ui.mvp.user.UserPresenter
 import ru.vladislav_akulinin.mychat_version_2.ui.activity.MainActivity
 import ru.vladislav_akulinin.mychat_version_2.utils.Utils.hideKeyboard
 
