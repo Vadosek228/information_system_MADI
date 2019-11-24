@@ -136,6 +136,11 @@ class MainActivity : AppCompatActivity() {
                     addFragment(fragment)
                     toolbar.setTitle(R.string.menu_load)
                 }
+                R.id.nav_news -> {
+                    val fragment = NewsFragment()
+                    addFragment(fragment)
+                    toolbar.setTitle(R.string.menu_news)
+                }
                 R.id.nav_library -> {
                     val fragment = LibraryFragment()
                     addFragment(fragment)

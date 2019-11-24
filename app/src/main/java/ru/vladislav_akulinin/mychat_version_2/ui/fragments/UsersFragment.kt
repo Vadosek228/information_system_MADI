@@ -163,34 +163,6 @@ class UsersFragment : Fragment(), OnItemClickedListener, UserInterface.View {
 
     }
 
-//    private fun getUsers() {
-//        val query: Query = FirebaseDatabase.getInstance().reference
-//                .child(USER_PATH_KEY)
-//                .orderByKey()
-//
-//        query.addListenerForSingleValueEvent(object : ValueEventListener {
-//            override fun onCancelled(p0: DatabaseError) {
-//
-//            }
-//
-//            override fun onDataChange(p0: DataSnapshot) {
-//                isLoading = if(p0.hasChildren()) {
-//                    for (snapshot in p0.children) {
-//                        val user = snapshot.getValue(User::class.java)!!
-//
-//                        if (user.id != firebaseUser?.uid) {
-//                            userList.add(user)
-//                        }
-//                    }
-//                    usersListAdapter.addAll(userList)
-//                    false
-//                } else {
-//                    false
-//                }
-//            }
-//        })
-//    }
-
 //    //обновление данных
 //    private fun refreshData() {
 //        usersListAdapter.removeLastItem()

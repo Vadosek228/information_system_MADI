@@ -57,6 +57,7 @@ class UsersListAdapter(
 
     fun addAll(newUser: List<User>) {
         val init = userList.size
+        userList.clear()
         userList.addAll(newUser)
         notifyItemRangeChanged(init, newUser.size)
     }

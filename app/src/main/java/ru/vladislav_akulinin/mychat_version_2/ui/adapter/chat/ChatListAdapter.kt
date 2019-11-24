@@ -55,6 +55,7 @@ class ChatListAdapter(
 
     fun addAll(newUserModel: MutableList<Chat>) {
         val init = chatModelList.size
+        chatModelList.clear()
         chatModelList.addAll(newUserModel)
         notifyItemRangeChanged(init, newUserModel.size)
     }
