@@ -1,5 +1,6 @@
 package ru.vladislav_akulinin.mychat_version_2.model;
 
+@Deprecated
 public class UserJava {
 
     private String id;

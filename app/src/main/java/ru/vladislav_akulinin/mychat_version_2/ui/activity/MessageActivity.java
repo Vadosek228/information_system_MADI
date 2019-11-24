@@ -43,6 +43,7 @@ import ru.vladislav_akulinin.mychat_version_2.notifications.Sender;
 import ru.vladislav_akulinin.mychat_version_2.notifications.Token;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
+@Deprecated
 public class MessageActivity extends AppCompatActivity {
 
     CircleImageView profile_image;

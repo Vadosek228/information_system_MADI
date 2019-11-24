@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_news.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -20,7 +19,6 @@ import ru.vladislav_akulinin.mychat_version_2.ui.mvp.news.NewsPresenter
 
 class NewsFragment : Fragment() , NewsInterface.View{
     val firebaseUser = FirebaseAuth.getInstance().currentUser
-    var firebaseReference = FirebaseDatabase.getInstance().reference.child("News")
 
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var yourNewsList: ArrayList<News>
@@ -51,10 +49,8 @@ class NewsFragment : Fragment() , NewsInterface.View{
             it.getNewsList(it)
         }
 
-        //todo create news
         view.floating_button_add_new_news.setOnClickListener{
-            val news = News("tema 2", "text 2")
-            firebaseReference.push().setValue(news)
+            createNews()
         }
 
         return view
@@ -66,5 +62,14 @@ class NewsFragment : Fragment() , NewsInterface.View{
 
     override fun updateNewsList(newsList: MutableList<News>) {
         newsAdapter.addAll(newsList)
+    }
+
+    fun createNews(){
+        fragmentManager!!
+                .beginTransaction()
+                .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+                .replace(R.id.container, CreateNewsFragment())
+                .addToBackStack(null)
+                .commit()
     }
 }

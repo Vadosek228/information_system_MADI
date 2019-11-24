@@ -28,6 +28,7 @@ import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ProfileFragmentJava;
 import ru.vladislav_akulinin.mychat_version_2.model.UserJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
+@Deprecated
 public class MainActivityJava extends AppCompatActivity {
 
     CircleImageView profile_image;
