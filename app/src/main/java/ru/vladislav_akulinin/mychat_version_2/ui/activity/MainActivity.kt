@@ -21,6 +21,7 @@ import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ChatsFragment
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.*
+import ru.vladislav_akulinin.mychat_version_2.ui.fragments.LibraryDocuments.LibraryFragment
 
 
 class MainActivity : AppCompatActivity() {

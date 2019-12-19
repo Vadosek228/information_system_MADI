@@ -16,7 +16,6 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_weight="0.4"
         android:background="@color/colorAccent"
         app:layout_constraintTop_toBottomOf="@+id/login_toolbar"
         tools:layout_editor_absoluteX="16dp"
@@ -38,7 +37,7 @@
         android:id="@+id/container_layout_fragment_sing_in_input_text"
         android:layout_weight="0.6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/textView"

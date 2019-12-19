@@ -38,6 +38,7 @@ import ru.vladislav_akulinin.mychat_version_2.R;
 
 import static android.app.Activity.RESULT_OK;
 
+@Deprecated
 public class ProfileFragmentJava extends Fragment {
 
     CircleImageView image_profile;

@@ -19,6 +19,7 @@ import java.util.List;
 import ru.vladislav_akulinin.mychat_version_2.model.ChatJava;
 import ru.vladislav_akulinin.mychat_version_2.R;
 
+@Deprecated
 public class MessageAdapterJava extends RecyclerView.Adapter<MessageAdapterJava.ViewHolder> {
 
     public static final int MSG_TYPE_LEFT = 0;
