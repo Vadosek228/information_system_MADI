@@ -2,10 +2,10 @@ package ru.vladislav_akulinin.mychat_version_2.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.activity_start.*
 import ru.vladislav_akulinin.mychat_version_2.R
 
 class StartActivity : AppCompatActivity() {
@@ -16,11 +16,11 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-        login.setOnClickListener{
+        findViewById<Button>(R.id.login).setOnClickListener{
             startActivity(Intent(this@StartActivity, LoginActivity::class.java))
         }
 
-        register.setOnClickListener{
+        findViewById<Button>(R.id.register).setOnClickListener{
             startActivity(Intent(this@StartActivity, RegisterActivity::class.java))
         }
     }

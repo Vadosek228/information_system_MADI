@@ -4,13 +4,15 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_register.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import java.util.HashMap
 
@@ -35,20 +37,20 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        btn_register.setOnClickListener{
+        findViewById<Button>(R.id.btn_register).setOnClickListener{
             registerSing()
         }
     }
 
     private fun registerSing(){
-        val firstName = tv_first_name?.text?.toString()
-        val lastName = tv_last_name?.text?.toString()
-        val fatherName = tv_father_name.text.toString()
-        val phone = tv_phone.text.toString()
-        val userStatus = spinner_status.selectedItem.toString()
-        val email = tv_email?.text?.toString()
-        val password = et_password?.text?.toString()
-        val passwordCheck = et_password_check?.text?.toString()
+        val firstName = findViewById<TextView>(R.id.tv_first_name).text?.toString()
+        val lastName = findViewById<TextView>(R.id.tv_last_name)?.text?.toString()
+        val fatherName = findViewById<TextView>(R.id.tv_father_name).text.toString()
+        val phone = findViewById<TextView>(R.id.tv_phone).text.toString()
+        val userStatus = findViewById<Spinner>(R.id.spinner_status).selectedItem.toString()
+        val email = findViewById<TextView>(R.id.tv_email)?.text?.toString()
+        val password = findViewById<TextView>(R.id.et_password)?.text?.toString()
+        val passwordCheck = findViewById<TextView>(R.id.et_password_check)?.text?.toString()
 
         if (firstName.isNullOrEmpty() || lastName.isNullOrEmpty() || email.isNullOrEmpty()
                 || password.isNullOrEmpty() || passwordCheck.isNullOrEmpty()) {

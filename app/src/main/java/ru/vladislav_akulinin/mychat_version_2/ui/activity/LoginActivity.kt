@@ -12,7 +12,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_login.*
 import ru.vladislav_akulinin.mychat_version_2.R
 
 class LoginActivity : AppCompatActivity() {

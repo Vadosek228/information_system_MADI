@@ -5,11 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_reset_password.*
 import ru.vladislav_akulinin.mychat_version_2.R
 
 @SuppressLint("Registered")
@@ -31,8 +32,8 @@ class ResetPasswordActivity() : AppCompatActivity(), Parcelable { //пароль
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        btn_reset.setOnClickListener {
-            val email = send_email.text.toString()
+        findViewById<Button>(R.id.btn_reset).setOnClickListener {
+            val email = findViewById<TextView>(R.id.send_email).text.toString()
 
             if (email == "") {
                 Toast.makeText(this@ResetPasswordActivity, "Необходимо заполнить все поля", Toast.LENGTH_SHORT).show()

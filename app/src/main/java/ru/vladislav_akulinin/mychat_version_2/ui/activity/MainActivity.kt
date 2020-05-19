@@ -16,7 +16,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.nav_header_main.*
 import ru.vladislav_akulinin.mychat_version_2.R
 import ru.vladislav_akulinin.mychat_version_2.model.User
 import ru.vladislav_akulinin.mychat_version_2.ui.fragments.ChatsFragment
@@ -97,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val myProfile = dataSnapshot.getValue(User::class.java)
-                tv_username_nav_header?.text = myProfile?.firstName + " " + myProfile?.lastName
+                findViewById<TextView>(R.id.tv_username_nav_header)?.text = myProfile?.firstName + " " + myProfile?.lastName
             }
         })
     }

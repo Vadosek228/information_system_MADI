@@ -38,12 +38,8 @@
             android:parentActivityName=".ui.activity.RegisterActivity"/>
 
         <activity
-            android:name=".ui.activity.MainActivityJava"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".ui.activity.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
 
         <activity android:name=".ui.activity.MessageActivity" />
 
